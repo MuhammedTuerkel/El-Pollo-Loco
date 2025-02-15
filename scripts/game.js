@@ -1,12 +1,9 @@
 let canvas;
-let ctx;
-let character = new Image();
+let world ;
 
-function init(){
-canvas = document.getElementById('canvas');
-ctx = canvas.getContext('2d');
-character.src = '../img/2_character_pepe/2_walk/W-21.png'
-setTimeout(() => {
-    ctx.drawImage(character, 50 ,220 , 100, 150);
-}, 1000);
+function init() {
+  canvas = document.getElementById("canvas");
+  world = new World(canvas);
+
+  console.log("My Character is", world.backgroundObjects);
 }
