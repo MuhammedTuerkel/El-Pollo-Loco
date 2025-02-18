@@ -7,15 +7,12 @@ class clouds extends movableObject {
     this.y = 10;
     let random = Math.random() * 200;
     this.x = Math.trunc(random);
-    this.cloudsMove();
+    this.speed = 1;
+    this.animate();
   }
 
-  cloudsMove() {
-    setInterval(() => {
-      this.x -= 0.25;
-      if (this.x == 0) {
-        this.x = 500;
-      }
-    }, 1000 / 60);
+  animate() {
+  this.moveLeft();
   }
+
 }

@@ -1,12 +1,15 @@
 class Character extends movableObject {
-    IMAGES_Walking = [
-        "img/2_character_pepe/2_walk/W-21.png",
-        "img/2_character_pepe/2_walk/W-22.png",
-        "img/2_character_pepe/2_walk/W-23.png",
-        "img/2_character_pepe/2_walk/W-24.png",
-        "img/2_character_pepe/2_walk/W-25.png",
-        "img/2_character_pepe/2_walk/W-26.png",
-      ];
+  IMAGES_Walking = [
+    "img/2_character_pepe/2_walk/W-21.png",
+    "img/2_character_pepe/2_walk/W-22.png",
+    "img/2_character_pepe/2_walk/W-23.png",
+    "img/2_character_pepe/2_walk/W-24.png",
+    "img/2_character_pepe/2_walk/W-25.png",
+    "img/2_character_pepe/2_walk/W-26.png",
+  ];
+
+  world;
+
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png", 150, 180);
     this.height = 250;
@@ -14,14 +17,16 @@ class Character extends movableObject {
     this.loadImages(this.IMAGES_Walking);
     this.animate();
   }
-  
-animate(){
+
+  animate() {
     setInterval(() => {
+      if (this.world.keyboard.RIGHT) {
         let i = this.currentImage % this.IMAGES_Walking.length;
-let path = this.IMAGES_Walking[i];
-this.img = this.imageChace[path];
-this.currentImage++
-}, 1000/ 10);
-}
+        let path = this.IMAGES_Walking[i];
+        this.img = this.imageChace[path];
+        this.currentImage++;
+      }
+    }, 1000 / 10);
+  }
   jump() {}
 }
