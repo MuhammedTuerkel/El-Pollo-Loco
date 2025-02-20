@@ -1,5 +1,6 @@
 class Chicken extends movableObject {
   x = 300 + Math.random() * 500;
+  width;
 
   IMAGES_Walking = [
     "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
@@ -14,6 +15,7 @@ class Chicken extends movableObject {
     this.speed = 1.5 + Math.random() * 0.25;
     this.animate();
   }
+
 
   animate() {
     setInterval(() => {
