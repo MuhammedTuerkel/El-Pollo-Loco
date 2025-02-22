@@ -1,25 +1,7 @@
 class World {
   character = new Character();
-  enemies = [
-    new Chicken("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png"),
-    new Chicken("img/3_enemies_chicken/chicken_small/1_walk/1_w.png"),
-    new Chicken("img/4_enemie_boss_chicken/1_walk/G1.png"),
-  ];
-  clouds = [
-    new clouds("img/5_background/layers/4_clouds/1.png", 0),
-    new clouds("img/5_background/layers/4_clouds/2.png", 719)
-  ];
+  level = level1;
 
-  backgroundObjects = [
-    new backgroundObject("img/5_background/layers/air.png", 0),
-    new backgroundObject("img/5_background/layers/3_third_layer/1.png", 0),
-    new backgroundObject("img/5_background/layers/2_second_layer/1.png", 0),
-    new backgroundObject("img/5_background/layers/1_first_layer/1.png", 0),
-    new backgroundObject("img/5_background/layers/air.png", 719),
-    new backgroundObject("img/5_background/layers/3_third_layer/2.png", 719),
-    new backgroundObject("img/5_background/layers/2_second_layer/2.png", 719),
-    new backgroundObject("img/5_background/layers/1_first_layer/2.png",719)
-  ];
   canvas;
   ctx;
   keyboard;
@@ -42,9 +24,10 @@ setWorld(){
 
 this.ctx.translate(this.camera_x, 0);
 
-    this.addToMap(this.backgroundObjects);
-    this.addToMap(this.clouds);
-    this.addToMap(this.enemies);
+    this.addToMap(this.level.backgroundObjects);
+    this.addToMap(this.level.clouds);
+    this.addToMap(this.level.enemies);
+    this.addToMap(this.level.coins);
 
     if (this.character.otherDirection) {
       this.ctx.save();
