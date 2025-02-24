@@ -44,6 +44,13 @@ class movableObject {
     return this.y < 180;
   }
 
+  isColliding (obj) {
+    return  this.x + this.width > obj.x &&
+    this.y + this.height > obj.y &&
+    this.x < obj.x &&
+    this.y < obj.y + obj.height
+}
+
   applyGravity() {
     setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {

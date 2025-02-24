@@ -1,6 +1,6 @@
 class coin extends movableObject{
-    width = 150;
-    height = 150;
+    width = 125;
+    height = 125;
 
     constructor(img, x){
         super().loadImage(img);
