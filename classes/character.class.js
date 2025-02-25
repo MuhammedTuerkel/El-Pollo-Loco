@@ -19,9 +19,32 @@ class Character extends movableObject {
     "img/2_character_pepe/3_jump/J-38.png",
     "img/2_character_pepe/3_jump/J-39.png",
   ];
+
+  IMAGES_DEAD = [
+    "img/2_character_pepe/5_dead/D-51.png",
+    "img/2_character_pepe/5_dead/D-52.png",
+    "img/2_character_pepe/5_dead/D-53.png",
+    "img/2_character_pepe/5_dead/D-54.png",
+    "img/2_character_pepe/5_dead/D-55.png",
+    "img/2_character_pepe/5_dead/D-56.png",
+    "img/2_character_pepe/5_dead/D-57.png",
+  ];
+
+  Images_Hurt = [
+    "img/2_character_pepe/4_hurt/H-41.png",
+    "img/2_character_pepe/4_hurt/H-42.png",
+    "img/2_character_pepe/4_hurt/H-43.png",
+  ];
   speed = 8;
   world;
   width;
+
+  offset = {
+    top: 120,
+    left: 30,
+    right: 40,
+    bottom: 30,
+  };
 
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png", 150, 80);
@@ -29,6 +52,8 @@ class Character extends movableObject {
     this.width = 130;
     this.loadImages(this.IMAGES_Walking);
     this.loadImages(this.Images_Jumping);
+    this.loadImages(this.IMAGES_DEAD);
+    this.loadImages(this.Images_Hurt);
     this.animate();
     this.applyGravity();
   }
@@ -39,7 +64,7 @@ class Character extends movableObject {
         this.moveRight();
       }
       if (this.world.keyboard.LEFT && this.x > 110) {
-       this.moveLeft();
+        this.moveLeft();
         this.otherDirection = true;
       }
 
@@ -51,7 +76,11 @@ class Character extends movableObject {
     }, 1000 / 60);
 
     setInterval(() => {
-      if (this.y < 180) {
+      if (this.isDead()) {
+        this.playAnimation(this.IMAGES_DEAD);
+      }else  if (this.isHurt()) {
+        this.playAnimation(this.Images_Hurt);
+      }else  if (this.y < 180) {
         this.playAnimation(this.Images_Jumping);
       } else {
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
