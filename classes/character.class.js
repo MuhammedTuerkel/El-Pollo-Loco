@@ -35,7 +35,6 @@ class Character extends movableObject {
     "img/2_character_pepe/4_hurt/H-42.png",
     "img/2_character_pepe/4_hurt/H-43.png",
   ];
-  speed = 8;
   world;
   width;
 
@@ -62,6 +61,7 @@ class Character extends movableObject {
     setInterval(() => {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX) {
         this.moveRight();
+        this.otherDirection = false;
       }
       if (this.world.keyboard.LEFT && this.x > 110) {
         this.moveLeft();

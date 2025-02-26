@@ -21,13 +21,13 @@ const level1 = new level(
         new backgroundObject("img/5_background/layers/air.png", 719 *2),
         new backgroundObject("img/5_background/layers/3_third_layer/1.png", 719 *2),
         new backgroundObject("img/5_background/layers/2_second_layer/1.png", 719 *2),
-        new backgroundObject("img/5_background/layers/1_first_layer/1.png",719 *2)
+        new backgroundObject("img/5_background/layers/1_first_layer/1.png",719 *2),
       ],
       coins = [
-        new coin("img/8_coin/coin_2.png", 500),
-        new coin("img/8_coin/coin_2.png", 800),
-        new coin("img/8_coin/coin_2.png", 1200),
-        new coin("img/8_coin/coin_2.png", 1500),
-        new coin("img/8_coin/coin_2.png", 1700),
-      ]
+        new coin("img/8_coin/coin_2.png", 300),
+        new coin("img/8_coin/coin_2.png", 600),
+        new coin("img/8_coin/coin_2.png", 900),
+        new coin("img/8_coin/coin_2.png", 1000),
+        new coin("img/8_coin/coin_2.png", 1300),
+      ],
 );

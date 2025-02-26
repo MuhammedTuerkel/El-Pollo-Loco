@@ -1,11 +1,4 @@
-class movableObject {
-  x;
-  y;
-  img;
-  height = 100;
-  width = 100;
-  imageChace = {};
-  currentImage = 0;
+class movableObject extends DrawableObject {
   otherDirection = false;
   speedY = 0;
   acceleration = 2.5;
@@ -19,24 +12,8 @@ class movableObject {
     bottom: 0,
   };
 
-  loadImage(path, x, y) {
-    this.img = new Image();
-    this.img.src = path;
-    this.x = x;
-    this.y = y;
-  }
-
-  loadImages(arr) {
-    arr.forEach((path) => {
-      let img = new Image();
-      img.src = path;
-      this.imageChace[path] = img;
-    });
-  }
-
   moveRight() {
     this.x += this.speed;
-    this.otherDirection = false;
   }
 
   moveLeft() {
@@ -49,6 +26,7 @@ class movableObject {
     this.img = this.imageChace[path];
     this.currentImage++;
   }
+
   isAboveGround() {
     return this.y < 180;
   }
