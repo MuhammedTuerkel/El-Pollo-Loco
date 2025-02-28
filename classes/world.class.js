@@ -2,7 +2,8 @@ class World {
   character = new Character();
   level = level1;
   statusbar = [
-    new StatusBar()
+    new StatusBar(0, -10),
+    new StatusBar(1, 40)
   ]
   canvas;
   ctx;
@@ -15,14 +16,15 @@ class World {
     this.keyboard = keyboard;
     this.draw();
     this.setWorld();
-    this.checkCollisions();
+    this.checkCollisionsWithEnemies();
+    this.checkCollisionsWithCoins();
   }
 
   setWorld() {
     this.character.world = this;
   }
 
-  checkCollisions(){
+  checkCollisionsWithEnemies(){
     setInterval(() => {
       this.level.enemies.forEach((enemy) => {
        if( this.character.isColliding(enemy)){
@@ -32,6 +34,17 @@ class World {
       })
     }, 200);
   }
+
+checkCollisionsWithCoins(){
+  setInterval(() => {
+    this.level.coins.forEach((coin) => {
+     if( this.character.isColliding(coin)){
+      this.character.collectCoin();
+      this.statusbar[1].coinsImage(this.character.coins);
+     }
+    })
+  }, 1000);
+}
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

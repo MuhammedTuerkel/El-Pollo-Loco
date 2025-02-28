@@ -1,5 +1,5 @@
 class StatusBar extends DrawableObject {
-  IMAGES = [
+  liveHeart = [
     "img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png",
     "img/7_statusbars/1_statusbar/2_statusbar_health/blue/20.png",
     "img/7_statusbars/1_statusbar/2_statusbar_health/blue/40.png",
@@ -8,38 +8,74 @@ class StatusBar extends DrawableObject {
     "img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png",
   ];
 
+  coinsBar = [
+    "img/7_statusbars/1_statusbar/1_statusbar_coin/orange/0.png",
+    "img/7_statusbars/1_statusbar/1_statusbar_coin/orange/20.png",
+    "img/7_statusbars/1_statusbar/1_statusbar_coin/orange/40.png",
+    "img/7_statusbars/1_statusbar/1_statusbar_coin/orange/60.png",
+    "img/7_statusbars/1_statusbar/1_statusbar_coin/orange/80.png",
+    "img/7_statusbars/1_statusbar/1_statusbar_coin/orange/100.png",
+  ];
+  coins = 0;
   percentage = 100;
 
-  constructor() {
+  constructor(path, y) {
     super();
-    this.loadImages(this.IMAGES);
-    this.x = 50;
-    this.y = -10;
+    this.loadImages(this.liveHeart);
+    this.loadImages(this.coinsBar);
+    this.y = y;
+    this.x = 10;
     this.width = 250;
     this.height = 70;
-    this.setPercentage(100);
+    if (path == 0) {
+      this.setPercentage(100);
+    } else if (path == 1) {
+      this.coinsImage(0);
+    } else {
+    }
+  }
+
+  coinsImage(coins) {
+    this.coins = coins;
+    let imagePath = this.coinsBar[this.getNum(this.coins)];
+    this.img = this.imageChace[imagePath];
   }
 
   setPercentage(percentage) {
     this.percentage = percentage;
-    let imagePath = this.IMAGES[this.getNum()];
+    let imagePath = this.liveHeart[this.getNumForLive(this.percentage)];
     this.img = this.imageChace[imagePath];
-    console.log(percentage)
   }
 
-  getNum() {
-    if (this.percentage >80) {
+  getNumForLive(variable) {
+    if (variable > 80) {
       return 5;
-    } else if (this.percentage > 60) {
+    } else if (variable > 60) {
       return 4;
-    } else if (this.percentage > 40) {
+    } else if (variable > 40) {
       return 3;
-    } else if (this.percentage > 20) {
+    } else if (variable > 20) {
       return 2;
-    } else if (this.percentage > 0) {
+    } else if (variable > 0) {
       return 1;
     } else {
       return 0;
+    }
+  }
+
+  getNum(variable) {
+    if (variable == 0) {
+      return 0;
+    } else if (variable == 20) {
+      return 1;
+    } else if (variable == 40) {
+      return 2;
+    } else if (variable == 60) {
+      return 3;
+    } else if (variable == 80) {
+      return 4;
+    } else {
+      return 5;
     }
   }
 }

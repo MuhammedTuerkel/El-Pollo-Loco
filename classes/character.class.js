@@ -37,6 +37,7 @@ class Character extends movableObject {
   ];
   world;
   width;
+  coins = 0;
 
   offset = {
     top: 120,
@@ -89,4 +90,10 @@ class Character extends movableObject {
       }
     }, 1000 / 10);
   }
+
+  collectCoin(){
+    if (this.coins < 100) {
+    this.coins += 20;
+    }
+}
 }
