@@ -30,4 +30,12 @@ const level1 = new level(
         new coin("img/8_coin/coin_2.png", 1000),
         new coin("img/8_coin/coin_2.png", 1300),
       ],
+
+  salsaBottle = [
+    new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 500),
+    new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 800),
+    new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 1000),
+    new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 1100),
+    new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 1500),
+  ]
 );

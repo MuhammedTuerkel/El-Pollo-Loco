@@ -22,6 +22,9 @@ keyboard.UP = true;
 if (event.keyCode == 32) {
 keyboard.SPACE = true;
 }
+if(event.keyCode == 69){
+  keyboard.THROW = true;
+}
 }
 )
 
@@ -37,6 +40,9 @@ keyboard.UP = false;
 }
 if (event.keyCode == 32) {
 keyboard.SPACE = false;
+}
+if(event.keyCode == 69){
+  keyboard.THROW = false;
 }
 }
 )
