@@ -72,6 +72,8 @@ class Character extends movableObject {
 
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
+        let jumpSound = new Audio('audio/jump.wav')
+        jumpSound.play();
       }
 
       this.world.camera_x = -this.x + 100;
@@ -99,7 +101,7 @@ class Character extends movableObject {
 }
 collectSalsabottle(){
   if (this.salsaBottle < 100) {
-    this.salsaBottle += 20;
+    this.world.statusbar[2].salsaBottle += 20;
   }
 }
 }

@@ -26,7 +26,11 @@ class StatusBar extends DrawableObject {
   "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/100.png",
   ];
 
-  constructor(path, y, object) {
+  percentage= 100;
+  coins= 0;
+salsaBottle = 0;
+
+  constructor(path, y) {
     super();
     this.loadImages(this.liveHeart);
     this.loadImages(this.coinsBar);

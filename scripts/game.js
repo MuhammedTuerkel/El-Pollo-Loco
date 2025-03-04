@@ -1,12 +1,26 @@
 let canvas;
 let world ;
 let keyboard = new Keyboard;
+let allow = false;
 
 function init() {
   canvas = document.getElementById("canvas");
+  if (!allow) {
+    addStartScreen();
+  }
+  if (allow) {
   world = new World(canvas, keyboard);
+  };
+}
 
-  console.log("My Character is", world.character);
+function addStartScreen(){
+  let ctx = canvas.getContext('2d');
+  let image = new Image();
+  image.src = 'img/9_intro_outro_screens/start/startscreen_1.png', 0, 0, 720, 480;
+  
+  image.onload = function () { 
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+  };
 }
 
 window.addEventListener('keydown',  (event) => {

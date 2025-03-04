@@ -2,9 +2,9 @@ class World {
   character = new Character();
   level = level1;
   statusbar = [
-    new StatusBar(0, -10, "Live"),
-    new StatusBar(1, 40, "Coins"),
-    new StatusBar(2, 95, "Salsabottle"),
+    new StatusBar(0, -10),
+    new StatusBar(1, 40),
+    new StatusBar(2, 95),
   ];
   throwableObject = [];
   canvas;
@@ -38,8 +38,10 @@ checkThrowObjects(){
   if (this.keyboard.THROW && this.statusbar[2].salsaBottle > 1) {
     let bottle = new ThrowableObject(this.character.x + 50, this.character.y +90);
     this.throwableObject.push(bottle);
-    this.statusbar[2].salsaBottle -= 20;
-    this.statusbar[2].salsaBottleImage(this.character.salsaBottle);
+    this.statusbar[2].salsaBottle -=20;
+    this.statusbar[2].salsaBottleImage(this.statusbar[2].salsaBottle);
+    let trow = new Audio('audio/throw.mp3')
+        trow.play();
   }
 }
 
@@ -67,7 +69,7 @@ checkThrowObjects(){
       if (this.character.isColliding(this.level.salsabottle[i])) {
         this.character.collectSalsabottle();
         this.deleteSalsabottle(i);
-        this.statusbar[2].salsaBottleImage(this.character.salsaBottle);
+        this.statusbar[2].salsaBottleImage(this.statusbar[2].salsaBottle);
       }
     }
   }

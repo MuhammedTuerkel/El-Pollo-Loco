@@ -70,6 +70,8 @@ class movableObject extends DrawableObject {
   hit() {
     if (this.energy > 0) {
       this.energy -= 5;
+      let hit = new Audio("audio/hit.wav");
+      hit.play();
     }
     this.lastHit = new Date().getTime();
   }
