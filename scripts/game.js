@@ -5,22 +5,30 @@ let allow = false;
 
 function init() {
   canvas = document.getElementById("canvas");
+  if (allow) {
+startGame();
+  };
   if (!allow) {
     addStartScreen();
   }
-  if (allow) {
+}
+
+function startGame(){
+  canvas.removeAttribute("onclick");
+  document.getElementById('playText').style= "display:none;"
   world = new World(canvas, keyboard);
-  };
+  let gameMusic = new Audio('audio/gamemusic.wav')
+gameMusic.play();
 }
 
 function addStartScreen(){
   let ctx = canvas.getContext('2d');
   let image = new Image();
   image.src = 'img/9_intro_outro_screens/start/startscreen_1.png', 0, 0, 720, 480;
-  
   image.onload = function () { 
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
   };
+
 }
 
 window.addEventListener('keydown',  (event) => {
