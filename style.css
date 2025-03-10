@@ -18,3 +18,25 @@ h2{
     color: rgb(255 255 255 / 91%);
     margin: 0;
 }
+
+#fullscreen{
+    font-size: 30px;
+    margin-top: 10px;
+    margin-right: 25px;
+    width: 720px;
+display: flex;
+justify-content: end;
+}
+
+.keysDescription{
+    width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.keysDescription p{
+    margin: 0;
+}
+.keysDescription img{
+width: 300px;
+}

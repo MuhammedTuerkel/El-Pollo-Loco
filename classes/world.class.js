@@ -36,7 +36,7 @@ class World {
 
 checkThrowObjects(){
   if (this.keyboard.THROW && this.statusbar[2].salsaBottle > 1) {
-    let bottle = new ThrowableObject(this.character.x + 50, this.character.y +90);
+    let bottle = new ThrowableObject(this.character.x + 50, this.character.y +90, this);
     this.throwableObject.push(bottle);
     this.statusbar[2].salsaBottle -=20;
     this.statusbar[2].salsaBottleImage(this.statusbar[2].salsaBottle);
@@ -87,16 +87,6 @@ checkThrowObjects(){
     this.addToMap(this.statusbar);
     this.ctx.translate(this.camera_x, 0);
     this.changeDirection();
-    this.ctx.beginPath();
-    this.ctx.lineWidth = "5";
-    this.ctx.strokeStyle = "blue";
-    this.ctx.rect(
-      this.character.x,
-      this.character.y,
-      this.character.width,
-      this.character.height
-    );
-    this.ctx.stroke();
     this.addCharacterToMap();
     this.restoreDirection();
     this.ctx.translate(-this.camera_x, 0);
@@ -115,18 +105,6 @@ checkThrowObjects(){
         object[i].width,
         object[i].height
       );
-    }
-    for (let x = 0; x < this.level.enemies.length; x++) {
-      this.ctx.beginPath();
-      this.ctx.lineWidth = "5";
-      this.ctx.strokeStyle = "blue";
-      this.ctx.rect(
-        this.level.enemies[x].x,
-        this.level.enemies[x].y,
-        this.level.enemies[x].width,
-        this.level.enemies[x].height
-      );
-      this.ctx.stroke();
     }
   }
 

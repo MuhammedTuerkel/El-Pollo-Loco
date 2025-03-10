@@ -13,6 +13,10 @@ startGame();
   }
 }
 
+function fullscreenMode(){
+canvas.requestFullscreen();
+}
+
 function startGame(){
   canvas.removeAttribute("onclick");
   document.getElementById('playText').style= "display:none;"
