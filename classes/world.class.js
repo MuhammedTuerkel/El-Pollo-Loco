@@ -11,6 +11,8 @@ class World {
   ctx;
   keyboard;
   camera_x = 0;
+  gameOver = false;
+  gameMusic = new Audio("audio/gamemusic.wav");
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -19,6 +21,7 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
+    this.gameMusic.play();
   }
 
   setWorld() {
@@ -34,16 +37,20 @@ class World {
     }, 200);
   }
 
-checkThrowObjects(){
-  if (this.keyboard.THROW && this.statusbar[2].salsaBottle > 1) {
-    let bottle = new ThrowableObject(this.character.x + 50, this.character.y +90, this);
-    this.throwableObject.push(bottle);
-    this.statusbar[2].salsaBottle -=20;
-    this.statusbar[2].salsaBottleImage(this.statusbar[2].salsaBottle);
-    let trow = new Audio('audio/throw.mp3')
-        trow.play();
+  checkThrowObjects() {
+    if (this.keyboard.THROW && this.statusbar[2].salsaBottle > 1) {
+      let bottle = new ThrowableObject(
+        this.character.x + 50,
+        this.character.y + 90,
+        this
+      );
+      this.throwableObject.push(bottle);
+      this.statusbar[2].salsaBottle -= 20;
+      this.statusbar[2].salsaBottleImage(this.statusbar[2].salsaBottle);
+      let trow = new Audio("audio/throw.mp3");
+      trow.play();
+    }
   }
-}
 
   checkCollisionsWithEnemies() {
     this.level.enemies.forEach((enemy) => {
@@ -91,9 +98,11 @@ checkThrowObjects(){
     this.restoreDirection();
     this.ctx.translate(-this.camera_x, 0);
     let self = this;
-    requestAnimationFrame(function () {
-      self.draw();
-    });
+    if (!this.gameOver) {
+      requestAnimationFrame(function () {
+        self.draw();
+      });
+    }
   }
 
   addToMap(object) {
@@ -140,5 +149,23 @@ checkThrowObjects(){
 
   deleteSalsabottle(i) {
     this.level.salsabottle.splice(i, 1);
+  }
+
+  gameOverScreen(i) {
+    this.gameMusic.pause();
+    this.gameMusic.currentTime = 0;
+    this.gameOver = true;
+    this.addToMap(this.level.backgroundObjects);
+    this.addGameOverToMap(i);
+  }
+
+  addGameOverToMap(i) {
+    this.ctx.drawImage(
+      this.level.gameover[i].img,
+      this.level.gameover[i].x,
+      this.level.gameover[i].y,
+      this.level.gameover[i].width,
+      this.level.gameover[i].height
+    );
   }
 }

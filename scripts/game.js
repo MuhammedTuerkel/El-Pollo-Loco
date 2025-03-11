@@ -21,8 +21,6 @@ function startGame(){
   canvas.removeAttribute("onclick");
   document.getElementById('playText').style= "display:none;"
   world = new World(canvas, keyboard);
-  let gameMusic = new Audio('audio/gamemusic.wav')
-gameMusic.play();
 }
 
 function addStartScreen(){

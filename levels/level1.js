@@ -37,5 +37,12 @@ const level1 = new level(
     new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 1000),
     new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 1100),
     new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 1500),
+  ],
+
+  gameover = [
+    new gameOver("img/9_intro_outro_screens/game_over/game over!.png"),
+    new gameOver("img/9_intro_outro_screens/game_over/game over!.png"),
+    new gameOver("img/9_intro_outro_screens/game_over/oh no you lost!.png"),
+    new gameOver("img/9_intro_outro_screens/game_over/you lost.png"),
   ]
 );

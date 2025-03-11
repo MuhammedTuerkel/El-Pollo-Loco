@@ -39,6 +39,7 @@ class Character extends movableObject {
   width;
   coins = 0;
   salsaBottle= 0;
+ randomNumber =Math.floor(Math.random() * 4);
 
   offset = {
     top: 120,
@@ -82,6 +83,9 @@ class Character extends movableObject {
     setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD);
+        setTimeout(() => {
+          this.world.gameOverScreen(this.randomNumber);
+        }, 700);
       }else  if (this.isHurt()) {
         this.playAnimation(this.Images_Hurt);
       }else  if (this.y < 180) {
