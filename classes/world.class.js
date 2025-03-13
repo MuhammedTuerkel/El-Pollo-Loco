@@ -49,6 +49,7 @@ class World {
       this.statusbar[2].salsaBottleImage(this.statusbar[2].salsaBottle);
       let trow = new Audio("audio/throw.mp3");
       trow.play();
+      this.checkCollisionsWithEndBoss(bottle);
     }
   }
 
@@ -79,6 +80,18 @@ class World {
         this.statusbar[2].salsaBottleImage(this.statusbar[2].salsaBottle);
       }
     }
+  }
+
+  checkCollisionsWithEndBoss(bottle) {
+   let Interval = setInterval(() => {
+      if (bottle.isColliding(this.level.enemies[3])) {
+        this.level.enemies[3].health -= 33;
+        console.log(this.level.enemies[3].health)
+        }
+    }, 1000);
+setTimeout(()=>{
+  clearInterval(Interval);
+}, 2000)
   }
 
   draw() {

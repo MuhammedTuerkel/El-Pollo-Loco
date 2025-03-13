@@ -31,7 +31,7 @@ const level1 = new level(
         new coin("img/8_coin/coin_2.png", 1300),
       ],
 
-  salsaBottle = [
+    salsabottle = [
     new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 500),
     new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 800),
     new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 1000),
