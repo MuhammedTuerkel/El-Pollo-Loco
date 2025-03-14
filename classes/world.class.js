@@ -85,8 +85,7 @@ class World {
   checkCollisionsWithEndBoss(bottle) {
    let Interval = setInterval(() => {
       if (bottle.isColliding(this.level.enemies[3])) {
-        this.level.enemies[3].health -= 33;
-        console.log(this.level.enemies[3].health)
+        this.level.enemies[3].hit();
         }
     }, 1000);
 setTimeout(()=>{
