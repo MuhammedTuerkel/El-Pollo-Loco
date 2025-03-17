@@ -5,6 +5,7 @@ class endBoss extends movableObject {
   health = 100;
   isHit = false;
   speed = 0.5;
+  world;
 
   IMAGES_Alert = [
     "img/4_enemie_boss_chicken/2_alert/G5.png",
@@ -50,6 +51,9 @@ class endBoss extends movableObject {
     setInterval(() => {
       if (this.health == 1) {
         this.playAnimation(this.IMAGES_DEAD);
+       setTimeout(() => {
+        window.location.reload()
+       }, 400);
       } else if (this.isHit) {
         this.playAnimation(this.IMAGES_HURT);
       } else {
