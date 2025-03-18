@@ -18,8 +18,8 @@ canvas.requestFullscreen();
 }
 
 function startGame(){
+  initLevel();
   canvas.removeAttribute("onclick");
-  document.getElementById('playText').style= "display:none;"
   world = new World(canvas, keyboard);
 }
 

@@ -22,6 +22,7 @@ class World {
     this.setWorld();
     this.run();
     this.gameMusic.play();
+    this.keyboard.bindBtsPressEvents();
   }
 
   setWorld() {

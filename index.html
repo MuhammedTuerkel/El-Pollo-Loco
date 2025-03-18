@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +13,8 @@
     <script src="classes/ThrowableObject.class.js"></script>
     <script src="classes/statusBar.class.js"></script>
     <script src="classes/background-object.class.js"></script>
-<script src="classes/clouds.class.js"></script>
-<script src="classes/keyboard.class.js"></script>
+    <script src="classes/clouds.class.js"></script>
+    <script src="classes/keyboard.class.js"></script>
     <script src="classes/chicken.class.js"></script>
     <script src="classes/character.class.js"></script>
     <script src="classes/level.class.js"></script>
@@ -24,19 +25,30 @@
     <script src="levels/level1.js"></script>
     <script src="scripts/game.js"></script>
 </head>
+
 <body onload="init()">
     <h1>El-Pollo-Loco</h1>
 
     <canvas onclick="init(allow=true)" id="canvas" width="720" height="480">
     </canvas>
-    <h2 id="playText">Click Anywhere To Play!</h2>
+    <div id="playText">
+        <div class="buttons">
+            <button id="arrowleft"><i class="fa-solid fa-arrow-left"></i></button>
+            <button id="arrowright"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+        <div class="buttons">
+            <button id="arrowup"><i class="fa-solid fa-arrow-up"></i></button>
+            <button id="arrowtosing"><i class="fa-solid fa-turn-up"></i></button>
+        </div>
+    </div>
     <i id="fullscreen" onclick="fullscreenMode()" class="fa-solid fa-expand"></i>
     <div class="keysDescription">
-    <img src="./img/keyboard.png" alt="">
-    <p>A = Move to Left</p>
-    <p>D = Move to Right</p>
-    <p>E = Throw bottle</p>
-    <p>Space = Jump</p>
+        <img src="./img/keyboard.png" alt="">
+        <p>A = Move to Left</p>
+        <p>D = Move to Right</p>
+        <p>E = Throw bottle</p>
+        <p>Space = Jump</p>
     </div>
 </body>
+
 </html>

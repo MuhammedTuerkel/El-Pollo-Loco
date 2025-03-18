@@ -18,6 +18,17 @@ class endBoss extends movableObject {
     "img/4_enemie_boss_chicken/2_alert/G12.png",
   ];
 
+  IMAGES_ATTACK = [
+    "img/4_enemie_boss_chicken/3_attack/G13.png",
+    "img/4_enemie_boss_chicken/3_attack/G14.png",
+    "img/4_enemie_boss_chicken/3_attack/G15.png",
+    "img/4_enemie_boss_chicken/3_attack/G16.png",
+    "img/4_enemie_boss_chicken/3_attack/G17.png",
+    "img/4_enemie_boss_chicken/3_attack/G18.png",
+    "img/4_enemie_boss_chicken/3_attack/G19.png",
+    "img/4_enemie_boss_chicken/3_attack/G20.png",
+  ];
+
   IMAGES_Walking = [
     "img/4_enemie_boss_chicken/1_walk/G1.png",
     "img/4_enemie_boss_chicken/1_walk/G2.png",
@@ -41,30 +52,46 @@ class endBoss extends movableObject {
     super().loadImage(img, this.x, this.y);
     this.loadImages(this.IMAGES_Alert);
     this.loadImages(this.IMAGES_Walking);
+    this.loadImages(this.IMAGES_ATTACK);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
     this.x = 1900;
     this.animate();
   }
 
+  hadContact = false;
+  i = 0;
   animate() {
     setInterval(() => {
       if (this.health == 1) {
         this.playAnimation(this.IMAGES_DEAD);
-       setTimeout(() => {
-        window.location.reload()
-       }, 400);
+        setTimeout(() => {
+          window.location.reload();
+        }, 400);
       } else if (this.isHit) {
         this.playAnimation(this.IMAGES_HURT);
-      } else {
-        this.playAnimation(this.IMAGES_Walking);
+      } else if (this.world.character.x > 1500 || this.hadContact) {
+        this.walk();
+        this.i++;
       }
     }, 200);
+
     setInterval(() => {
-      if (this.health > 2) {
+      if (this.health > 2 && this.hadContact) {
         this.moveLeft();
       }
     }, 1000 / 60);
+  }
+
+  walk() {
+    if (this.i < 7) {
+      this.playAnimation(this.IMAGES_Alert);
+    } else if (this.i < 14) {
+      this.playAnimation(this.IMAGES_ATTACK);
+    } else {
+      this.playAnimation(this.IMAGES_Walking);
+      this.hadContact = true;
+    }
   }
 
   hit() {
