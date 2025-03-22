@@ -39,6 +39,30 @@ class World {
     }, 200);
   }
 
+  draw() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.translate(this.camera_x, 0);
+    this.addToMap(this.level.backgroundObjects);
+    this.addToMap(this.level.clouds);
+    this.addToMap(this.level.enemies);
+    this.addToMap(this.level.coins);
+    this.addToMap(this.level.salsabottle);
+    this.addToMap(this.throwableObject);
+    this.ctx.translate(-this.camera_x, 0);
+    this.addToMap(this.statusbar);
+    this.ctx.translate(this.camera_x, 0);
+    this.changeDirection();
+    this.addCharacterToMap();
+    this.restoreDirection();
+    this.ctx.translate(-this.camera_x, 0);
+    let self = this;
+    if (!this.gameOver) {
+      requestAnimationFrame(function () {
+        self.draw();
+      });
+    }
+  }
+
   checkThrowObjects() {
     if (this.keyboard.THROW && this.statusbar[2].salsaBottle > 1) {
       let bottle = new ThrowableObject(
@@ -93,30 +117,6 @@ class World {
 setTimeout(()=>{
   clearInterval(Interval);
 }, 2000)
-  }
-
-  draw() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.translate(this.camera_x, 0);
-    this.addToMap(this.level.backgroundObjects);
-    this.addToMap(this.level.clouds);
-    this.addToMap(this.level.enemies);
-    this.addToMap(this.level.coins);
-    this.addToMap(this.level.salsabottle);
-    this.addToMap(this.throwableObject);
-    this.ctx.translate(-this.camera_x, 0);
-    this.addToMap(this.statusbar);
-    this.ctx.translate(this.camera_x, 0);
-    this.changeDirection();
-    this.addCharacterToMap();
-    this.restoreDirection();
-    this.ctx.translate(-this.camera_x, 0);
-    let self = this;
-    if (!this.gameOver) {
-      requestAnimationFrame(function () {
-        self.draw();
-      });
-    }
   }
 
   addToMap(object) {

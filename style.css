@@ -1,92 +1,172 @@
 @font-face {
-    font-family: 'Inter';
-    src: url('fonts/Inter_18pt-Black.ttf');
+  font-family: "Inter";
+  src: url("fonts/Inter_18pt-Black.ttf");
 }
 
-canvas{
-    background-color: rgb(0, 0, 0);
+canvas {
+  background-color: rgb(0, 0, 0);
+  display: block;
+}
+
+body {
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  background-image: url("./img/desert.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 1000px;
+  height: 100vh;
+}
+
+h2 {
+  font-size: 40px;
+  color: rgb(255 255 255 / 91%);
+  margin: 0;
+}
+
+#fullscreen {
+  font-size: 30px;
+  margin-top: 10px;
+  margin-right: 25px;
+  width: 720px;
+  display: flex;
+  justify-content: end;
+}
+
+#fullscreen::before {
+  cursor: pointer;
+}
+
+#playText {
+  justify-content: space-between;
+  width: 720px;
+  display: none;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.buttons button {
+  background-color: #ff7f00;
+  border: 0;
+  border-radius: 30px;
+  width: 50px;
+  height: 50px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.keysDescription {
+  width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.keysDescription p {
+  margin: 0;
+  color: white;
+}
+.keysDescription img {
+  width: 300px;
+}
+
+.rotatemessage {
+  width: 210px;
+  height: 130px;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: none;
+  box-shadow: 0px 0px 1px 5000px rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+@media (max-width: 760px) {
+  canvas {
+    width: 100%;
+  }
+  #fullscreen {
+    width: 100%;
+  }
+  .keysDescription {
+    width: 100%;
+  }
+  #playText {
+    width: 90%;
+  }
+}
+
+.phone {
+  height: 50px;
+  width: 100px;
+  border: 3px solid white;
+  border-radius: 10px;
+  animation: rotate 1.5s ease-in-out infinite alternate;
+}
+
+.message {
+  color: white;
+  font-size: 1em;
+  margin-top: 40px;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-90deg);
+  }
+  100% {
+    transform: rotate(-90deg);
+  }
+}
+
+@media only screen and (max-device-width: 760px) and (orientation: portrait) {
+  .rotatemessage {
     display: block;
+  }
 }
 
+@media (max-width: 1200px) {
+  #playText {
+    display: flex;
+  }
+}
+
+@media (max-width: 1000px), (max-height: 450px) {
+  #playText {
+    width: 65%;
+  }
+}
+
+@media (max-height: 600px) {
+  #playText {
+    position: relative;
+    bottom: 60px;
+  }
+  #fullscreen {
+    display: none;
+  }
 body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    background-image: url("./img/desert.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;  
+    overflow-y: hidden;
+}
 }
 
-h2{
-
-    font-size: 40px;
-    color: rgb(255 255 255 / 91%);
-    margin: 0;
-}
-
-#fullscreen{
-    font-size: 30px;
-    margin-top: 10px;
-    margin-right: 25px;
-    width: 720px;
-display: flex;
-justify-content: end;
-}
-
-#playText{
-    display: flex;
-    justify-content: space-between;
-    width: 720px;
-}
-
-.buttons{
-    display: flex;
-    gap: 15px;
-}
-
-.buttons button{
-    background-color: #ff7f00;
-    border: 0;
-    border-radius: 30px;
-width: 50px;
-height: 50px;
-font-size: 25px;
-}
-
-.keysDescription{
-    width: 720px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-.keysDescription p{
-    margin: 0;
-    color: white;
-}
-.keysDescription img{
-width: 300px;
-}
-
-@media (max-width: 760px){
-    canvas{
-        width: 100%;
-    }
-    #fullscreen{
-        width: 100%;
-    }
-    .keysDescription{
-        width: 100%;
-    }
-    #playText{
-        width: 100%;
-    }
-}
-
-@media(max-height: 480px){
-
+@media (max-height: 600px) {
+  h1 {
+    display: none;
+  }
+  canvas {
+    height: 100vh;
+  }
 }
