@@ -1,5 +1,5 @@
 class World {
-  character = new Character();
+  character = new Character("img/2_character_pepe/2_walk/W-21.png");
   level = level1;
   statusbar = [
     new StatusBar(0, -10),
