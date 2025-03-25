@@ -1,11 +1,11 @@
 class Keyboard {
-
     LEFT;
     RIGHT;
     UP;
     SPACE;
     THROW;
 
+// checks the buttons in the mobile version if it is clicked or notclicked 
     bindBtsPressEvents(){
         document.getElementById('arrowleft').addEventListener('touchstart', (e)=>{
             e.preventDefault();

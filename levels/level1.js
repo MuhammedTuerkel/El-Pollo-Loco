@@ -3,9 +3,9 @@ let level1;
 function initLevel() {
   level1 = new level(
     (enemies = [
-      new Chicken("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png", 1),
-      new Chicken("img/3_enemies_chicken/chicken_small/1_walk/1_w.png", 2),
-      new Chicken("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png" ,1),
+      new Chicken("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png", "normal", 800),
+      new Chicken("img/3_enemies_chicken/chicken_small/1_walk/1_w.png", "small", 300),
+      new Chicken("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png" ,"normal",500),
       new endBoss("img/4_enemie_boss_chicken/2_alert/G5.png"),
     ]),
     (clouds = [

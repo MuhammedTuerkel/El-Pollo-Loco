@@ -19,17 +19,18 @@ class StatusBar extends DrawableObject {
 
   salsaBottleBar = [
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/0.png",
-  "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/20.png",
-  "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/40.png",
-  "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/60.png",
-  "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/80.png",
-  "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/100.png",
+    "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/20.png",
+    "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/40.png",
+    "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/60.png",
+    "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/80.png",
+    "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/100.png",
   ];
 
-  percentage= 100;
-  coins= 0;
-salsaBottle = 0;
+  percentage = 100;
+  coins = 0;
+  salsaBottle = 0;
 
+  // loads everything important at the beginning when the class loads
   constructor(path, y) {
     super();
     this.loadImages(this.liveHeart);
@@ -39,34 +40,44 @@ salsaBottle = 0;
     this.x = 10;
     this.width = 250;
     this.height = 70;
-    if (path == 0) {
-      this.setPercentage(100);
-    } else if (path == 1) {
-      this.coinsImage(0);
-    } else if (path == 2) {
-      this.salsaBottleImage(0);
+    this.setAllToDefault(path);
+  }
+
+  // set everything to Default at the beginning of the class
+  setAllToDefault(path) {
+    if (path == "energy") {
+      this.setEnergyInTheStatusbar(100);
+    } else if (path == "coins") {
+      this.setCoinsInTheStatusBar(0);
+    } else if (path == "salsabottle") {
+      this.setSalsabottleInTheStatusbar(0);
     }
   }
 
-  coinsImage(coins) {
+  // set the amount of coins to the statusbar
+  setCoinsInTheStatusBar(coins) {
     this.coins = coins;
-    let imagePath = this.coinsBar[this.getNum(this.coins)];
+    let imagePath = this.coinsBar[this.getNumForCoins(this.coins)];
     this.img = this.imageChace[imagePath];
   }
 
-  salsaBottleImage(salsaBottle){
+  // set the amount of salsabottle to the statusbar
+  setSalsabottleInTheStatusbar(salsaBottle) {
     this.salsaBottle = salsaBottle;
-    let imagePath = this.salsaBottleBar[this.getNumForSalsaBottle(this.salsaBottle)];
+    let imagePath =
+      this.salsaBottleBar[this.getNumForSalsaBottle(this.salsaBottle)];
     this.img = this.imageChace[imagePath];
   }
 
-  setPercentage(percentage) {
+  // set the amount of energy to the statusbar
+  setEnergyInTheStatusbar(percentage) {
     this.percentage = percentage;
-    let imagePath = this.liveHeart[this.getNumForLive(this.percentage)];
+    let imagePath = this.liveHeart[this.getNumForEnergy(this.percentage)];
     this.img = this.imageChace[imagePath];
   }
 
-  getNumForLive(variable) {
+  // get the right JSON ARRAY number for energy
+  getNumForEnergy(variable) {
     if (variable > 80) {
       return 5;
     } else if (variable > 60) {
@@ -82,7 +93,8 @@ salsaBottle = 0;
     }
   }
 
-  getNum(variable) {
+    // get the right JSON ARRAY number for Coins
+  getNumForCoins(variable) {
     if (variable == 0) {
       return 0;
     } else if (variable == 20) {
@@ -98,7 +110,8 @@ salsaBottle = 0;
     }
   }
 
-  getNumForSalsaBottle(variable){
+  // get the right JSON ARRAY number for salsabottle
+  getNumForSalsaBottle(variable) {
     if (variable == 0) {
       return 0;
     } else if (variable == 20) {

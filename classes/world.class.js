@@ -2,9 +2,9 @@ class World {
   character = new Character("img/2_character_pepe/2_walk/W-21.png");
   level = level1;
   statusbar = [
-    new StatusBar(0, -10),
-    new StatusBar(1, 40),
-    new StatusBar(2, 95),
+    new StatusBar("energy", -10),
+    new StatusBar("coins", 40),
+    new StatusBar("salsabottle", 95),
   ];
   throwableObject = [];
   canvas;
@@ -72,7 +72,7 @@ class World {
       );
       this.throwableObject.push(bottle);
       this.statusbar[2].salsaBottle -= 20;
-      this.statusbar[2].salsaBottleImage(this.statusbar[2].salsaBottle);
+      this.statusbar[2].setSalsabottleInTheStatusbar(this.statusbar[2].salsaBottle);
       let trow = new Audio("audio/throw.mp3");
       trow.play();
       this.checkCollisionsWithEndBoss(bottle);
@@ -83,7 +83,7 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         this.character.hit();
-        this.statusbar[0].setPercentage(this.character.energy);
+        this.statusbar[0].setEnergyInTheStatusbar(this.character.energy);
       }
     });
   }
@@ -93,7 +93,7 @@ class World {
       if (this.character.isColliding(coins[i])) {
         this.character.collectCoin();
         this.deleteCoin(i);
-        this.statusbar[1].coinsImage(this.character.coins);
+        this.statusbar[1].setCoinsInTheStatusBar(this.character.coins);
       }
     }
   }
@@ -103,7 +103,7 @@ class World {
       if (this.character.isColliding(this.level.salsabottle[i])) {
         this.character.collectSalsabottle();
         this.deleteSalsabottle(i);
-        this.statusbar[2].salsaBottleImage(this.statusbar[2].salsaBottle);
+        this.statusbar[2].setSalsabottleInTheStatusbar(this.statusbar[2].salsaBottle);
       }
     }
   }

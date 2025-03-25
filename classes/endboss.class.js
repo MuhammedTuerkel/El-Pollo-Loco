@@ -4,10 +4,12 @@ class endBoss extends movableObject {
   y = 100;
   health = 100;
   isHit = false;
-  speed = 0.5;
+  speed = 0.8;
   world;
+  hadContact = false;
+  intervalsAfterHadContact = 0;
 
-  IMAGES_Alert = [
+  images_Alert = [
     "img/4_enemie_boss_chicken/2_alert/G5.png",
     "img/4_enemie_boss_chicken/2_alert/G6.png",
     "img/4_enemie_boss_chicken/2_alert/G7.png",
@@ -18,7 +20,7 @@ class endBoss extends movableObject {
     "img/4_enemie_boss_chicken/2_alert/G12.png",
   ];
 
-  IMAGES_ATTACK = [
+  images_Attack = [
     "img/4_enemie_boss_chicken/3_attack/G13.png",
     "img/4_enemie_boss_chicken/3_attack/G14.png",
     "img/4_enemie_boss_chicken/3_attack/G15.png",
@@ -29,53 +31,62 @@ class endBoss extends movableObject {
     "img/4_enemie_boss_chicken/3_attack/G20.png",
   ];
 
-  IMAGES_Walking = [
+  images_Walking = [
     "img/4_enemie_boss_chicken/1_walk/G1.png",
     "img/4_enemie_boss_chicken/1_walk/G2.png",
     "img/4_enemie_boss_chicken/1_walk/G3.png",
     "img/4_enemie_boss_chicken/1_walk/G4.png",
   ];
 
-  IMAGES_HURT = [
+  images_Hurt = [
     "img/4_enemie_boss_chicken/4_hurt/G21.png",
     "img/4_enemie_boss_chicken/4_hurt/G22.png",
     "img/4_enemie_boss_chicken/4_hurt/G23.png",
   ];
 
-  IMAGES_DEAD = [
+  images_Dead = [
     "img/4_enemie_boss_chicken/5_dead/G24.png",
     "img/4_enemie_boss_chicken/5_dead/G25.png",
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
-  constructor(img) {
-    super().loadImage(img, this.x, this.y);
-    this.loadImages(this.IMAGES_Alert);
-    this.loadImages(this.IMAGES_Walking);
-    this.loadImages(this.IMAGES_ATTACK);
-    this.loadImages(this.IMAGES_HURT);
-    this.loadImages(this.IMAGES_DEAD);
+  // loads everything important at the beginning when the class loads
+  constructor(endBoss) {
+    super().loadImage(endBoss, this.x, this.y);
+    this.loadImages(this.images_Alert);
+    this.loadImages(this.images_Walking);
+    this.loadImages(this.images_Attack);
+    this.loadImages(this.images_Hurt);
+    this.loadImages(this.images_Dead);
     this.x = 1900;
     this.animate();
+    this.moveLeftFunction();
   }
 
-  hadContact = false;
-  i = 0;
+  // make different animations when hit is dead or walk
   animate() {
     setInterval(() => {
       if (this.health == 1) {
-        this.playAnimation(this.IMAGES_DEAD);
-        setTimeout(() => {
-          window.location.reload();
-        }, 400);
+        this.isDead();
       } else if (this.isHit) {
-        this.playAnimation(this.IMAGES_HURT);
+        this.playAnimation(this.images_Hurt);
       } else if (this.world.character.x > 1500 || this.hadContact) {
         this.walk();
-        this.i++;
+        this.intervalsAfterHadContact++;
       }
     }, 200);
+  }
 
+  // when he's dead the game ends
+  isDead() {
+    this.playAnimation(this.images_Dead);
+    setTimeout(() => {
+      window.location.reload();
+    }, 400);
+  }
+
+// he walks to left if he is alive and he had eye contact with the character
+  moveLeftFunction() {
     setInterval(() => {
       if (this.health > 2 && this.hadContact) {
         this.moveLeft();
@@ -83,17 +94,20 @@ class endBoss extends movableObject {
     }, 1000 / 60);
   }
 
+
+  // when he had eyeContact with the character he makes a animation and beginns to walk 
   walk() {
-    if (this.i < 7) {
-      this.playAnimation(this.IMAGES_Alert);
-    } else if (this.i < 14) {
-      this.playAnimation(this.IMAGES_ATTACK);
+    if (this.intervalsAfterHadContact < 7) {
+      this.playAnimation(this.images_Alert);
+    } else if (this.intervalsAfterHadContact < 14) {
+      this.playAnimation(this.images_Attack);
     } else {
-      this.playAnimation(this.IMAGES_Walking);
+      this.playAnimation(this.images_Walking);
       this.hadContact = true;
     }
   }
 
+  // when he is hit by the salsaBottle his health goes down by 33% after 3 hits he is dead
   hit() {
     if (this.health > 2) {
       this.health -= 33;
