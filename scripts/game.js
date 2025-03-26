@@ -3,6 +3,7 @@ let world ;
 let keyboard = new Keyboard;
 let allow = false;
 
+// function that loads when the website loads
 function init() {
   canvas = document.getElementById("canvas");
   if (allow) {
@@ -13,16 +14,19 @@ startGame();
   }
 }
 
+// makes the game to fullscreen
 function fullscreenMode(){
 canvas.requestFullscreen();
 }
 
+// creates the world class and starts the game
 function startGame(){
   initLevel();
   canvas.removeAttribute("onclick");
   world = new World(canvas, keyboard);
 }
 
+// adds a startScreen without starting the game
 function addStartScreen(){
   let ctx = canvas.getContext('2d');
   let image = new Image();
