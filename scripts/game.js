@@ -2,6 +2,7 @@ let canvas;
 let world ;
 let keyboard = new Keyboard;
 let allow = false;
+let audioList= [];
 
 // function that loads when the website loads
 function init() {
@@ -17,6 +18,12 @@ startGame();
 // makes the game to fullscreen
 function fullscreenMode(){
 canvas.requestFullscreen();
+}
+
+function muteWebsite() {
+    audioList.forEach(audio => {
+        audio.muted = !audio.muted; // Wechsel zwischen stumm und laut
+    });
 }
 
 // creates the world class and starts the game

@@ -31,16 +31,20 @@ h2 {
   margin: 0;
 }
 
-#fullscreen {
-  font-size: 30px;
+.fullscreen {
   margin-top: 10px;
   margin-right: 25px;
   width: 720px;
   display: flex;
   justify-content: end;
+  gap: 15px;
 }
 
-#fullscreen::before {
+.fullscreen i {
+  font-size: 30px;
+}
+
+.fullscreen i::before {
   cursor: pointer;
 }
 

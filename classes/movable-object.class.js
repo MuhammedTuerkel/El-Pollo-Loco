@@ -4,6 +4,8 @@ class movableObject extends DrawableObject {
   acceleration = 2.5;
   energy = 100;
   lastHit = 0;
+  hitSound = new Audio("audio/hit.wav");
+  
 
   offset = {
     top: 0,
@@ -11,6 +13,12 @@ class movableObject extends DrawableObject {
     right: 0,
     bottom: 0,
   };
+
+  // push the audio to an array
+  constructor(){
+    super();
+    audioList.push(this.hitSound);
+  }
 
 // the movableObject moves to right at a speed
   moveRight() {
@@ -80,8 +88,7 @@ class movableObject extends DrawableObject {
   hit() {
     if (this.energy > 0) {
       this.energy -= 5;
-      let hit = new Audio("audio/hit.wav");
-      hit.play();
+      this.hitSound.play();
     }
     this.lastHit = new Date().getTime();
   }

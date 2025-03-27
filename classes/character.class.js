@@ -46,6 +46,7 @@ class Character extends movableObject {
     right: 40,
     bottom: 30,
   };
+  jumpSound = new Audio('audio/jump.wav');
 
   // loads everything important at the beginning when the class loads
   constructor(character) {
@@ -59,6 +60,7 @@ class Character extends movableObject {
     this.move();
     this.animateCharacter();
     this.applyGravity();
+    audioList.push(this.jumpSound);
   }
 
   // checks if keys pressed and moves right, left and up
@@ -79,9 +81,9 @@ class Character extends movableObject {
 
   // character make different animations for example when he is jumping, walking, is hit or when he's dead
   animateCharacter(){
-    setInterval(() => {
+ let characterInterval = setInterval(() => {
       if (this.isDead()) {
-     this.isDeadFunction();
+     this.isDeadFunction(characterInterval);
       }else  if (this.isHurt()) {
         this.playAnimation(this.images_Hurt);
       }else  if (this.isAboveGround()) {
@@ -129,15 +131,14 @@ moveLeftFunction(){
 // function to jump
 jumpFunction(){
   this.jump();
-  let jumpSound = new Audio('audio/jump.wav');
-  jumpSound.play();
+  this.jumpSound.play();
 }
 
 // when the Character is Dead it plays the Dead animation and then loads the Gameoverscreen
-isDeadFunction(){
+isDeadFunction(cI){
   this.playAnimation(this.images_Dead);
   setTimeout(() => {
-    this.world.gameOverScreen(this.randomNumberForEndscreen);
+    this.world.gameOverScreen(this.randomNumberForEndscreen, cI);
   }, 700);
 }
 }

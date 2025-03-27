@@ -13,6 +13,8 @@ class World {
   camera_x = 0;
   gameOver = false;
   gameMusic = new Audio("audio/gamemusic.wav");
+  gameoverMusic = new Audio ("audio/gameover.wav");
+ trow = new Audio("audio/throw.mp3");
 
   // loads everything important at the beginning when the class loads
   constructor(canvas, keyboard) {
@@ -20,11 +22,20 @@ class World {
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.draw();
+    this.playGameMusic();
     this.setWorld();
     this.run();
-    this.gameMusic.play();
     this.keyboard.bindBtsPressEvents();
   }
+
+  // plays the gamemusic in the background
+playGameMusic(){
+  this.gameMusic.loop = true;
+  this.gameMusic.play();
+  audioList.push(this.gameMusic);
+  audioList.push(this.trow);
+  audioList.push(this.gameoverMusic);
+}
 
   // set the world variable to the subvariables to have access to it
   setWorld() {
@@ -80,9 +91,8 @@ class World {
   // checks if you have a Object to throw and then throws it
   checkThrowObjects() {
     if (this.keyboard.THROW && this.statusbar[2].salsaBottle > 1) {
-      this.throwObject();
-      let trow = new Audio("audio/throw.mp3");
-      trow.play();
+     let bottle = this.throwObject();
+      this.trow.play();
       this.checkCollisionsWithEndBoss(bottle);
     }
   }
@@ -99,6 +109,7 @@ class World {
     this.statusbar[2].setSalsabottleInTheStatusbar(
       this.statusbar[2].salsaBottle
     );
+    return bottle
   }
 
   // checks if the character have a collision with the enemies or the endBoss
@@ -200,12 +211,14 @@ class World {
   }
 
   // if you die the game is over and it loads the gameover screen
-  gameOverScreen(i) {
+  gameOverScreen(i,cI) {
     this.gameMusic.pause();
     this.gameMusic.currentTime = 0;
     this.gameOver = true;
     this.addToMap(this.level.backgroundObjects);
     this.addGameOverToMap(i);
+    this.gameoverMusic.play();
+    clearInterval(cI)
   }
 
   // add a random gameover screen to the canvas
