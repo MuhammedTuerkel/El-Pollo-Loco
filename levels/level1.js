@@ -9,8 +9,8 @@ function initLevel() {
       new endBoss("img/4_enemie_boss_chicken/2_alert/G5.png"),
     ]),
     (clouds = [
-      new clouds("img/5_background/layers/4_clouds/1.png", 0),
-      new clouds("img/5_background/layers/4_clouds/2.png", 719),
+      new Clouds("img/5_background/layers/4_clouds/1.png", 0),
+      new Clouds("img/5_background/layers/4_clouds/2.png", 719),
     ]),
     (backgroundObjects = [
       new backgroundObject("img/5_background/layers/air.png", 0),

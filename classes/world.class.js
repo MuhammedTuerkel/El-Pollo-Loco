@@ -219,6 +219,21 @@ playGameMusic(){
     this.addGameOverToMap(i);
     this.gameoverMusic.play();
     clearInterval(cI)
+    setTimeout(() => {
+      this.goToStartScreen(true);
+    }, 3000);
+  }
+  
+  winTheGame(){
+    this.gameMusic.pause();
+    this.gameMusic.currentTime = 0;
+    this.gameOver = true;
+  }
+
+  goToStartScreen(){
+    world = null;
+    init(allow= false);
+    canvas.setAttribute("onclick", "init(allow= true)");
   }
 
   // add a random gameover screen to the canvas

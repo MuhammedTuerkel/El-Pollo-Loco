@@ -81,8 +81,9 @@ class endBoss extends movableObject {
   isDead() {
     this.playAnimation(this.images_Dead);
     setTimeout(() => {
-      window.location.reload();
-    }, 400);
+      this.world.winTheGame();
+      this.world.goToStartScreen();
+    }, 1000);
   }
 
 // he walks to left if he is alive and he had eye contact with the character
