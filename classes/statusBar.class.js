@@ -26,18 +26,26 @@ class StatusBar extends DrawableObject {
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/green/100.png",
   ];
 
+  endBossBar = [
+    "img/7_statusbars/2_statusbar_endboss/1_Hit_Left-removebg-preview.png",
+    "img/7_statusbars/2_statusbar_endboss/2_Hits_Left-removebg-preview.png",
+    "img/7_statusbars/2_statusbar_endboss/3_Hits_Left-removebg-preview.png"
+  ];
+
   percentage = 100;
   coins = 0;
   salsaBottle = 0;
+  endBoss = 100;
 
   // loads everything important at the beginning when the class loads
-  constructor(path, y) {
+  constructor(path, x, y) {
     super();
     this.loadImages(this.liveHeart);
     this.loadImages(this.coinsBar);
     this.loadImages(this.salsaBottleBar);
+    this.loadImages(this.endBossBar)
     this.y = y;
-    this.x = 10;
+    this.x = x;
     this.width = 250;
     this.height = 70;
     this.setAllToDefault(path);
@@ -51,6 +59,8 @@ class StatusBar extends DrawableObject {
       this.setCoinsInTheStatusBar(0);
     } else if (path == "salsabottle") {
       this.setSalsabottleInTheStatusbar(0);
+    }else if ( path == "endboss"){
+this.setEndbossInTheStatusbar(100);
     }
   }
 
@@ -73,6 +83,12 @@ class StatusBar extends DrawableObject {
   setEnergyInTheStatusbar(percentage) {
     this.percentage = percentage;
     let imagePath = this.liveHeart[this.getNumForEnergy(this.percentage)];
+    this.img = this.imageChace[imagePath];
+  }
+
+  setEndbossInTheStatusbar(health){
+    this.endBoss = health;
+    let imagePath = this.endBossBar[this.getNumForEndboss(this.endBoss)];
     this.img = this.imageChace[imagePath];
   }
 
@@ -124,6 +140,18 @@ class StatusBar extends DrawableObject {
       return 4;
     } else {
       return 5;
+    }
+  }
+
+  getNumForEndboss(variable){
+    if (variable == 100) {
+      return 2;
+    } else if (variable == 67) {
+      return 1;
+    } else if (variable < 34) {
+      return 0;
+    }else{
+      return 0;
     }
   }
 }

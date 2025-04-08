@@ -2,9 +2,10 @@ class World {
   character = new Character("img/2_character_pepe/2_walk/W-21.png");
   level = level1;
   statusbar = [
-    new StatusBar("energy", -10),
-    new StatusBar("coins", 40),
-    new StatusBar("salsabottle", 95),
+    new StatusBar("energy",10 ,  -10),
+    new StatusBar("coins",10 , 40),
+    new StatusBar("salsabottle",10 , 95),
+    new StatusBar("endboss",450 ,  -10),
   ];
   throwableObject = [];
   canvas;
@@ -151,6 +152,10 @@ playGameMusic(){
     let Interval = setInterval(() => {
       if (bottle.isColliding(this.level.enemies[3])) {
         this.level.enemies[3].hit();
+        console.log( this.level.enemies[3].health)
+        this.statusbar[3].setEndbossInTheStatusbar(
+          this.level.enemies[3].health
+        );
       }
     }, 1000);
     setTimeout(() => {
