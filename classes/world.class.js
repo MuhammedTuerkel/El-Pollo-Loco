@@ -238,7 +238,7 @@ playGameMusic(){
   goToStartScreen(){
     world = null;
     init(allow= false);
-    canvas.setAttribute("onclick", "init(allow= true)");
+    canvas.setAttribute("onclick", "init(allow = true)");
   }
 
   // add a random gameover screen to the canvas

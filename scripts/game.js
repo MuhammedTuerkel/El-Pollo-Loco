@@ -5,9 +5,14 @@ let allow = false;
 let audioList = [];
 let gameIsRunning = false;
 
+function onload(){
+  canvas = document.getElementById("canvas");
+  canvas.setAttribute("onclick", "init(allow = true)");
+init();
+}
+
 // function that loads when the website loads
 function init() {
-  canvas = document.getElementById("canvas");
   if (allow == true) {
     startGame();
   }
