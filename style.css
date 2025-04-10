@@ -107,6 +107,10 @@ h2 {
   #playText {
     width: 90%;
   }
+
+  .fullscreen{
+    width: 100%;
+  }
 }
 
 .phone {
@@ -139,6 +143,7 @@ h2 {
   .rotatemessage {
     display: block;
   }
+
 }
 
 @media (max-width: 1200px) {
@@ -157,6 +162,9 @@ h2 {
   #playText {
     position: relative;
     bottom: 60px;
+  }
+  .fullscreen{
+    position: absolute;
   }
   #fullscreen {
     display: none;

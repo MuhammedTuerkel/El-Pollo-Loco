@@ -36,17 +36,44 @@ class Character extends movableObject {
     "img/2_character_pepe/4_hurt/H-43.png",
   ];
 
+  images_Idle = [
+    "img/2_character_pepe/1_idle/idle/I-1.png",
+    "img/2_character_pepe/1_idle/idle/I-2.png",
+    "img/2_character_pepe/1_idle/idle/I-3.png",
+    "img/2_character_pepe/1_idle/idle/I-4.png",
+    "img/2_character_pepe/1_idle/idle/I-5.png",
+    "img/2_character_pepe/1_idle/idle/I-6.png",
+    "img/2_character_pepe/1_idle/idle/I-7.png",
+    "img/2_character_pepe/1_idle/idle/I-8.png",
+    "img/2_character_pepe/1_idle/idle/I-9.png",
+    "img/2_character_pepe/1_idle/idle/I-10.png",
+  ];
+
+  images_longIdle = [
+    "img/2_character_pepe/1_idle/long_idle/I-11.png",
+    "img/2_character_pepe/1_idle/long_idle/I-12.png",
+    "img/2_character_pepe/1_idle/long_idle/I-13.png",
+    "img/2_character_pepe/1_idle/long_idle/I-14.png",
+    "img/2_character_pepe/1_idle/long_idle/I-15.png",
+    "img/2_character_pepe/1_idle/long_idle/I-16.png",
+    "img/2_character_pepe/1_idle/long_idle/I-17.png",
+    "img/2_character_pepe/1_idle/long_idle/I-18.png",
+    "img/2_character_pepe/1_idle/long_idle/I-19.png",
+    "img/2_character_pepe/1_idle/long_idle/I-20.png",
+  ];
+
   world;
   coins = 0;
-  salsaBottle= 0;
- randomNumberForEndscreen =Math.floor(Math.random() * 4);
+  salsaBottle = 0;
+  randomNumberForEndscreen = Math.floor(Math.random() * 4);
   offset = {
     top: 120,
     left: 30,
     right: 40,
     bottom: 30,
   };
-  jumpSound = new Audio('audio/jump.wav');
+  jumpSound = new Audio("audio/jump.wav");
+  idle_time = 0;
 
   // loads everything important at the beginning when the class loads
   constructor(character) {
@@ -57,6 +84,8 @@ class Character extends movableObject {
     this.loadImages(this.images_Jumping);
     this.loadImages(this.images_Dead);
     this.loadImages(this.images_Hurt);
+    this.loadImages(this.images_Idle);
+    this.loadImages(this.images_longIdle);
     this.move();
     this.animateCharacter();
     this.applyGravity();
@@ -67,78 +96,90 @@ class Character extends movableObject {
   move() {
     setInterval(() => {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX) {
-      this.moveRightFunction();
+        this.moveRightFunction();
       }
       if (this.world.keyboard.LEFT && this.x > 110) {
-      this.moveLeftFunction();
+        this.moveLeftFunction();
       }
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-    this.jumpFunction();
+        this.jumpFunction();
       }
       this.cameraMovesWithCharacter();
     }, 1000 / 60);
   }
 
   // character make different animations for example when he is jumping, walking, is hit or when he's dead
-  animateCharacter(){
- let characterInterval = setInterval(() => {
+  animateCharacter() {
+    let characterInterval = setInterval(() => {
       if (this.isDead()) {
-     this.isDeadFunction(characterInterval);
-      }else  if (this.isHurt()) {
+        this.isDeadFunction(characterInterval);
+      } else if (this.isHurt()) {
         this.playAnimation(this.images_Hurt);
-      }else  if (this.isAboveGround()) {
+        this.idle_time =0;
+      } else if (this.isAboveGround()) {
         this.playAnimation(this.images_Jumping);
-      } else  if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-          this.playAnimation(this.images_Walking);
-        }
-    }, 1000 / 10);
+        this.idle_time =0;
+      } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+        this.playAnimation(this.images_Walking);
+        this.idle_time =0;
+      } else {
+        this.characterIdle();
+      }
+    }, 1000 / 7);
   }
 
-// coins are going up to 100 coins thats the max you can have
-  collectCoin(){
-    if (this.coins < 100) {
-    this.coins += 20;
+  characterIdle() {
+    if (this.idle_time < 70) {
+      this.playAnimation(this.images_Idle);
     }
-}
-
-// salsabottles going up to 100 thats the max you can have
-collectSalsabottle(){
-  if (this.salsaBottle < 100) {
-    this.world.statusbar[2].salsaBottle += 20;
+    this.idle_time++;
+    if (this.idle_time > 70) {
+      this.playAnimation(this.images_longIdle);
+    }
   }
-}
 
+  // coins are going up to 100 coins thats the max you can have
+  collectCoin() {
+    if (this.coins < 100) {
+      this.coins += 20;
+    }
+  }
 
-// when the charcter moves the camera moves with him
-cameraMovesWithCharacter(){
- return this.world.camera_x = -this.x + 100;
-}
+  // salsabottles going up to 100 thats the max you can have
+  collectSalsabottle() {
+    if (this.salsaBottle < 100) {
+      this.world.statusbar[2].salsaBottle += 20;
+    }
+  }
 
+  // when the charcter moves the camera moves with him
+  cameraMovesWithCharacter() {
+    return (this.world.camera_x = -this.x + 100);
+  }
 
-// function to walk right
-moveRightFunction(){
-  this.moveRight();
-  this.otherDirection = false;
-}
+  // function to walk right
+  moveRightFunction() {
+    this.moveRight();
+    this.otherDirection = false;
+  }
 
+  // function to walk left
+  moveLeftFunction() {
+    this.moveLeft();
+    this.otherDirection = true;
+  }
 
-// function to walk left
-moveLeftFunction(){
-  this.moveLeft();
-  this.otherDirection = true;
-}
+  // function to jump
+  jumpFunction() {
+    this.jump();
+    this.jumpSound.play();
+  }
 
-// function to jump
-jumpFunction(){
-  this.jump();
-  this.jumpSound.play();
-}
-
-// when the Character is Dead it plays the Dead animation and then loads the Gameoverscreen
-isDeadFunction(cI){
-  this.playAnimation(this.images_Dead);
-  setTimeout(() => {
-    this.world.gameOverScreen(this.randomNumberForEndscreen, cI);
-  }, 700);
-}
+  // when the Character is Dead it plays the Dead animation and then loads the Gameoverscreen
+  isDeadFunction(cI) {
+    this.playAnimation(this.images_Dead);
+    setTimeout(() => {
+      this.world.gameOverScreen(this.randomNumberForEndscreen, cI);
+    }, 700);
+  }
 }

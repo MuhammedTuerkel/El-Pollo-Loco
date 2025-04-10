@@ -28,7 +28,8 @@ function fullscreenMode() {
 
 function muteWebsite() {
   audioList.forEach((audio) => {
-    audio.muted = !audio.muted; // Wechsel zwischen stumm und laut
+    audio.muted = !audio.muted; 
+    localStorage.setItem("muted", audio.muted)
   });
 }
 
