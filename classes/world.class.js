@@ -2,10 +2,10 @@ class World {
   character = new Character("img/2_character_pepe/2_walk/W-21.png");
   level = level1;
   statusbar = [
-    new StatusBar("energy",10 ,  -10),
-    new StatusBar("coins",10 , 40),
-    new StatusBar("salsabottle",10 , 95),
-    new StatusBar("endboss",450 ,  -10),
+    new StatusBar("energy", 10, -10),
+    new StatusBar("coins", 10, 40),
+    new StatusBar("salsabottle", 10, 95),
+    new StatusBar("endboss", 450, -10),
   ];
   throwableObject = [];
   canvas;
@@ -14,8 +14,9 @@ class World {
   camera_x = 0;
   gameOver = false;
   gameMusic = new Audio("audio/gamemusic.wav");
-  gameoverMusic = new Audio ("audio/gameover.wav");
- trow = new Audio("audio/throw.mp3");
+  gameoverMusic = new Audio("audio/gameover.wav");
+  trow = new Audio("audio/throw.mp3");
+  endBossHit = new Audio("audio/endboss_hit.wav");
 
   // loads everything important at the beginning when the class loads
   constructor(canvas, keyboard) {
@@ -30,13 +31,14 @@ class World {
   }
 
   // plays the gamemusic in the background
-playGameMusic(){
-  this.gameMusic.loop = true;
-  this.gameMusic.play();
-  audioList.push(this.gameMusic);
-  audioList.push(this.trow);
-  audioList.push(this.gameoverMusic);
-}
+  playGameMusic() {
+    this.gameMusic.loop = true;
+    this.gameMusic.play();
+    audioList.push(this.gameMusic);
+    audioList.push(this.trow);
+    audioList.push(this.gameoverMusic);
+    audioList.push(this.endBossHit);
+  }
 
   // set the world variable to the subvariables to have access to it
   setWorld() {
@@ -92,7 +94,7 @@ playGameMusic(){
   // checks if you have a Object to throw and then throws it
   checkThrowObjects() {
     if (this.keyboard.THROW && this.statusbar[2].salsaBottle > 1) {
-     let bottle = this.throwObject();
+      let bottle = this.throwObject();
       this.trow.play();
       this.checkCollisionsWithEndBoss(bottle);
     }
@@ -110,7 +112,7 @@ playGameMusic(){
     this.statusbar[2].setSalsabottleInTheStatusbar(
       this.statusbar[2].salsaBottle
     );
-    return bottle
+    return bottle;
   }
 
   // checks if the character have a collision with the enemies or the endBoss
@@ -147,12 +149,13 @@ playGameMusic(){
     }
   }
 
-    // checks if the salsabottles have a collision with the endBoss
+  // checks if the salsabottles have a collision with the endBoss
   checkCollisionsWithEndBoss(bottle) {
     let Interval = setInterval(() => {
       if (bottle.isColliding(this.level.enemies[3])) {
         this.level.enemies[3].hit();
-        console.log( this.level.enemies[3].health)
+        this.endBossHit.play();
+        console.log(this.level.enemies[3].health);
         this.statusbar[3].setEndbossInTheStatusbar(
           this.level.enemies[3].health
         );
@@ -205,39 +208,39 @@ playGameMusic(){
     );
   }
 
-  // deletes the coin if you colllect it from the ground 
+  // deletes the coin if you colllect it from the ground
   deleteCoin(i) {
     this.level.coins.splice(i, 1);
   }
 
-  // deletes the salsaBottle if you colllect it from the ground 
+  // deletes the salsaBottle if you colllect it from the ground
   deleteSalsabottle(i) {
     this.level.salsabottle.splice(i, 1);
   }
 
   // if you die the game is over and it loads the gameover screen
-  gameOverScreen(i,cI) {
+  gameOverScreen(i, cI) {
     this.gameMusic.pause();
     this.gameMusic.currentTime = 0;
     this.gameOver = true;
     this.addToMap(this.level.backgroundObjects);
     this.addGameOverToMap(i);
     this.gameoverMusic.play();
-    clearInterval(cI)
+    clearInterval(cI);
     setTimeout(() => {
       this.goToStartScreen(true);
     }, 3000);
   }
-  
-  winTheGame(){
+
+  winTheGame() {
     this.gameMusic.pause();
     this.gameMusic.currentTime = 0;
     this.gameOver = true;
   }
 
-  goToStartScreen(){
+  goToStartScreen() {
     world = null;
-    init(allow= false);
+    init((allow = false));
     canvas.setAttribute("onclick", "init(allow = true)");
   }
 

@@ -25,6 +25,18 @@ body {
   height: 100vh;
 }
 
+.imperessum{
+  text-decoration: none;
+  color: white;
+  margin-top: 30px;
+  font-size: 16px;
+}
+
+.imperessum:hover{
+  font-size: 17px;
+color: #aeaeae;
+}
+
 h2 {
   font-size: 40px;
   color: rgb(255 255 255 / 91%);
