@@ -16,7 +16,7 @@ class DrawableObject{
         this.y = y;
       }
     
-      // makes a lot of images from a variable and puts the path in to the source like this: <img src="path"></img>
+    /** * makes a lot of images from a variable and puts the path in to the source like this: <img src="path"></img> */
       loadImages(arr) {
         arr.forEach((path) => {
           let img = new Image();

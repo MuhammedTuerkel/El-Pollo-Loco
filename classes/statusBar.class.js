@@ -37,7 +37,7 @@ class StatusBar extends DrawableObject {
   salsaBottle = 0;
   endBoss = 100;
 
-  // loads everything important at the beginning when the class loads
+/** * loads everything important at the beginning when the class loads */
   constructor(path, x, y) {
     super();
     this.loadImages(this.liveHeart);
@@ -51,7 +51,7 @@ class StatusBar extends DrawableObject {
     this.setAllToDefault(path);
   }
 
-  // set everything to Default at the beginning of the class
+/** * set everything to Default at the beginning of the class */
   setAllToDefault(path) {
     if (path == "energy") {
       this.setEnergyInTheStatusbar(100);
@@ -64,14 +64,14 @@ this.setEndbossInTheStatusbar(100);
     }
   }
 
-  // set the amount of coins to the statusbar
+/** * set the amount of coins to the statusbar */
   setCoinsInTheStatusBar(coins) {
     this.coins = coins;
     let imagePath = this.coinsBar[this.getNumForCoins(this.coins)];
     this.img = this.imageChace[imagePath];
   }
 
-  // set the amount of salsabottle to the statusbar
+/** * set the amount of salsabottle to the statusbar */
   setSalsabottleInTheStatusbar(salsaBottle) {
     this.salsaBottle = salsaBottle;
     let imagePath =
@@ -79,20 +79,21 @@ this.setEndbossInTheStatusbar(100);
     this.img = this.imageChace[imagePath];
   }
 
-  // set the amount of energy to the statusbar
+/** * set the amount of energy to the statusbar */
   setEnergyInTheStatusbar(percentage) {
     this.percentage = percentage;
     let imagePath = this.liveHeart[this.getNumForEnergy(this.percentage)];
     this.img = this.imageChace[imagePath];
   }
 
+  /** * set the health of the endboss in the statusbar */
   setEndbossInTheStatusbar(health){
     this.endBoss = health;
     let imagePath = this.endBossBar[this.getNumForEndboss(this.endBoss)];
     this.img = this.imageChace[imagePath];
   }
 
-  // get the right JSON ARRAY number for energy
+/** * get the right JSON ARRAY number for energy */
   getNumForEnergy(variable) {
     if (variable > 80) {
       return 5;
@@ -109,7 +110,7 @@ this.setEndbossInTheStatusbar(100);
     }
   }
 
-    // get the right JSON ARRAY number for Coins
+/** * get the right JSON ARRAY number for Coins */
   getNumForCoins(variable) {
     if (variable == 0) {
       return 0;
@@ -126,7 +127,7 @@ this.setEndbossInTheStatusbar(100);
     }
   }
 
-  // get the right JSON ARRAY number for salsabottle
+/** * get the right JSON ARRAY number for salsabottle */
   getNumForSalsaBottle(variable) {
     if (variable == 0) {
       return 0;
@@ -143,6 +144,7 @@ this.setEndbossInTheStatusbar(100);
     }
   }
 
+  /** * health of endboss */
   getNumForEndboss(variable){
     if (variable == 100) {
       return 2;

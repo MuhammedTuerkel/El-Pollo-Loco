@@ -18,7 +18,7 @@ class World {
   trow = new Audio("audio/throw.mp3");
   endBossHit = new Audio("audio/endboss_hit.wav");
 
-  // loads everything important at the beginning when the class loads
+/** * loads everything important at the beginning when the class loads */
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -30,7 +30,7 @@ class World {
     this.keyboard.bindBtsPressEvents();
   }
 
-  // plays the gamemusic in the background
+/** * plays the gamemusic in the background */
   playGameMusic() {
     this.gameMusic.loop = true;
     this.gameMusic.play();
@@ -40,13 +40,13 @@ class World {
     audioList.push(this.endBossHit);
   }
 
-  // set the world variable to the subvariables to have access to it
+/** * set the world variable to the subvariables to have access to it */
   setWorld() {
     this.character.world = this;
     this.level.enemies[3].world = this;
   }
 
-  // runs the checkColission functions in an Interval that checks 5 times a second
+/** * runs the checkColission functions in an Interval that checks 5 times a second */
   run() {
     setInterval(() => {
       this.checkCollisionsWithEnemies();
@@ -56,7 +56,7 @@ class World {
     }, 200);
   }
 
-  // the draw function is a function that's repeats itself again and again it draws everything in to the canvas
+/** * the draw function is a function that's repeats itself again and again it draws everything in to the canvas */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
@@ -74,7 +74,7 @@ class World {
     }
   }
 
-  // calls the addToMap-draw function for all objects
+/** * calls the addToMap-draw function for all objects */
   addAllObjectsToMap() {
     this.addToMap(this.level.backgroundObjects);
     this.addToMap(this.level.clouds);
@@ -84,14 +84,14 @@ class World {
     this.addToMap(this.throwableObject);
   }
 
-  // calls the addToMap-draw function for the statusbar and moves with the camera to stay static
+/** * calls the addToMap-draw function for the statusbar and moves with the camera to stay static */
   addStatusBarToMap() {
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusbar);
     this.ctx.translate(this.camera_x, 0);
   }
 
-  // checks if you have a Object to throw and then throws it
+/** * checks if you have a Object to throw and then throws it */
   checkThrowObjects() {
     if (this.keyboard.THROW && this.statusbar[2].salsaBottle > 1) {
       let bottle = this.throwObject();
@@ -100,7 +100,7 @@ class World {
     }
   }
 
-  // Creates the throwableObject and draws it then refreshs the statusbar
+/** * Creates the throwableObject and draws it then refreshs the statusbar */
   throwObject() {
     let bottle = new ThrowableObject(
       this.character.x + 50,
@@ -115,7 +115,7 @@ class World {
     return bottle;
   }
 
-  // checks if the character have a collision with the enemies or the endBoss
+/** * checks if the character have a collision with the enemies or the endBoss */
   checkCollisionsWithEnemies() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
@@ -125,7 +125,7 @@ class World {
     });
   }
 
-  // checks if the character have a collision with coins
+/** * checks if the character have a collision with coins */
   checkCollisionsWithCoins() {
     for (let i = 0; i < this.level.coins.length; i++) {
       if (this.character.isColliding(coins[i])) {
@@ -136,7 +136,7 @@ class World {
     }
   }
 
-  // checks if the character have a collision with salsabottles
+/** * checks if the character have a collision with salsabottles */
   checkCollisionsWithSalsaBottle() {
     for (let i = 0; i < this.level.salsabottle.length; i++) {
       if (this.character.isColliding(this.level.salsabottle[i])) {
@@ -149,7 +149,7 @@ class World {
     }
   }
 
-  // checks if the salsabottles have a collision with the endBoss
+/** * checks if the salsabottles have a collision with the endBoss */
   checkCollisionsWithEndBoss(bottle) {
     let Interval = setInterval(() => {
       if (bottle.isColliding(this.level.enemies[3])) {
@@ -166,7 +166,7 @@ class World {
     }, 2000);
   }
 
-  // draws the objects in to the map
+/** * draws the objects in to the map */
   addToMap(object) {
     for (let i = 0; i < object.length; i++) {
       this.ctx.drawImage(
@@ -179,7 +179,7 @@ class World {
     }
   }
 
-  // changes the direction of the Character if he walks to the opposite side
+ /** * changes the direction of the Character if he walks to the opposite side */
   changeDirection() {
     if (this.character.otherDirection) {
       this.ctx.save();
@@ -189,7 +189,7 @@ class World {
     }
   }
 
-  // restores the direction of the character
+/** * restores the direction of the character */
   restoreDirection() {
     if (this.character.otherDirection) {
       this.character.x = this.character.x * -1;
@@ -197,7 +197,7 @@ class World {
     }
   }
 
-  // draws the character to the map
+/** * draws the character to the map */
   addCharacterToMap() {
     this.ctx.drawImage(
       this.character.img,
@@ -208,17 +208,17 @@ class World {
     );
   }
 
-  // deletes the coin if you colllect it from the ground
+/** * deletes the coin if you colllect it from the ground */
   deleteCoin(i) {
     this.level.coins.splice(i, 1);
   }
 
-  // deletes the salsaBottle if you colllect it from the ground
+/** * deletes the salsaBottle if you colllect it from the ground */
   deleteSalsabottle(i) {
     this.level.salsabottle.splice(i, 1);
   }
 
-  // if you die the game is over and it loads the gameover screen
+/** * if you die the game is over and it loads the gameover screen */
   gameOverScreen(i, cI) {
     this.gameMusic.pause();
     this.gameMusic.currentTime = 0;
@@ -238,13 +238,15 @@ class World {
     this.gameOver = true;
   }
 
+  /** * goes to StartScreen when the gameEnds */
   goToStartScreen() {
+    audioList = [];
     world = null;
     init((allow = false));
     canvas.setAttribute("onclick", "init(allow = true)");
   }
 
-  // add a random gameover screen to the canvas
+/** * add a random gameover screen to the canvas */
   addGameOverToMap(i) {
     this.ctx.drawImage(
       this.level.gameover[i].img,

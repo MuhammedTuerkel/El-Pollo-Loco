@@ -131,6 +131,7 @@ h2 {
   border: 3px solid white;
   border-radius: 10px;
   animation: rotate 1.5s ease-in-out infinite alternate;
+  margin-left: 40px;
 }
 
 .message {
@@ -158,7 +159,7 @@ h2 {
 
 }
 
-@media (max-width: 1200px) {
+@media (pointer: coarse) {
   #playText {
     display: flex;
   }

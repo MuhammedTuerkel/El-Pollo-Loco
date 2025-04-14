@@ -5,15 +5,16 @@ let allow = false;
 let audioList = [];
 let gameIsRunning = false;
 
-function onload(){
+function onload() {
   canvas = document.getElementById("canvas");
   canvas.setAttribute("onclick", "init(allow = true)");
-init();
+  init();
 }
 
-// function that loads when the website loads
+/** * function that loads when the website loads */
 function init() {
   if (allow == true) {
+    canvas.removeAttribute("onclick");
     startGame();
   }
   if (allow == false) {
@@ -21,27 +22,38 @@ function init() {
   }
 }
 
-// makes the game to fullscreen
+/** * makes the game to fullscreen */
 function fullscreenMode() {
   canvas.requestFullscreen();
 }
 
+/** * mutes all sounds in the website */
 function muteWebsite() {
   audioList.forEach((audio) => {
-    audio.muted = !audio.muted; 
-    localStorage.setItem("muted", audio.muted)
+    audio.muted = !audio.muted;
+    localStorage.setItem("muted", audio.muted);
   });
 }
 
-// creates the world class and starts the game
+/** * creates the world class and starts the game */
 function startGame() {
   initLevel();
-  gameIsRunning = true;
-  canvas.removeAttribute("onclick");
   world = new World(canvas, keyboard);
+  if (gameIsRunning) {
+    checkIfgameIsMuted();
+  }
+  gameIsRunning = true;
 }
 
-// adds a startScreen without starting the game
+/** * checks if the game is already muted at the beginning */
+function checkIfgameIsMuted() {
+  let muted = localStorage.getItem("muted");
+  if (muted) {
+    muteWebsite();
+  }
+}
+
+/** * adds a startScreen without starting the game */
 function addStartScreen() {
   let ctx = canvas.getContext("2d");
   let image = new Image();

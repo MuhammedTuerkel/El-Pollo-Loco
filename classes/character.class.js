@@ -75,7 +75,7 @@ class Character extends movableObject {
   jumpSound = new Audio("audio/jump.wav");
   idle_time = 0;
 
-  // loads everything important at the beginning when the class loads
+/** * loads everything important at the beginning when the class loads */
   constructor(character) {
     super().loadImage(character, 150, 80);
     this.height = 250;
@@ -92,7 +92,7 @@ class Character extends movableObject {
     audioList.push(this.jumpSound);
   }
 
-  // checks if keys pressed and moves right, left and up
+  /** * checks if keys pressed and moves right, left and up */
   move() {
     setInterval(() => {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX) {
@@ -108,7 +108,7 @@ class Character extends movableObject {
     }, 1000 / 60);
   }
 
-  // character make different animations for example when he is jumping, walking, is hit or when he's dead
+  /** * character make different animations for example when he is jumping, walking, is hit or when he's dead */
   animateCharacter() {
     let characterInterval = setInterval(() => {
       if (this.isDead()) {
@@ -128,6 +128,7 @@ class Character extends movableObject {
     }, 1000 / 7);
   }
 
+  /** * when the character isn`t moving the character idles or sleeps */
   characterIdle() {
     if (this.idle_time < 70) {
       this.playAnimation(this.images_Idle);
@@ -138,44 +139,44 @@ class Character extends movableObject {
     }
   }
 
-  // coins are going up to 100 coins thats the max you can have
+/** * coins are going up to 100 coins thats the max you can have */
   collectCoin() {
     if (this.coins < 100) {
       this.coins += 20;
     }
   }
 
-  // salsabottles going up to 100 thats the max you can have
+/** * salsabottles going up to 100 thats the max you can have */
   collectSalsabottle() {
     if (this.salsaBottle < 100) {
       this.world.statusbar[2].salsaBottle += 20;
     }
   }
 
-  // when the charcter moves the camera moves with him
+ /** * when the charcter moves the camera moves with him */
   cameraMovesWithCharacter() {
     return (this.world.camera_x = -this.x + 100);
   }
 
-  // function to walk right
+ /** * function to walk right */
   moveRightFunction() {
     this.moveRight();
     this.otherDirection = false;
   }
 
-  // function to walk left
+/** * function to walk left */
   moveLeftFunction() {
     this.moveLeft();
     this.otherDirection = true;
   }
 
-  // function to jump
+/** * function to jump */
   jumpFunction() {
     this.jump();
     this.jumpSound.play();
   }
 
-  // when the Character is Dead it plays the Dead animation and then loads the Gameoverscreen
+ /** * when the Character is Dead it plays the Dead animation and then loads the Gameoverscreen */
   isDeadFunction(cI) {
     this.playAnimation(this.images_Dead);
     setTimeout(() => {

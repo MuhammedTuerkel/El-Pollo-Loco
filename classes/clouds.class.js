@@ -2,7 +2,7 @@ class Clouds extends movableObject {
   width = 600;
   height = 250;
 
- // loads everything important at the beginning when the class loads
+/** * loads everything important at the beginning when the class loads */
   constructor(img, x) {
     super().loadImage(img,);
     this.y = 10;
@@ -12,7 +12,7 @@ class Clouds extends movableObject {
     this.animate();
   }
 
-  // clouds moveLeft 
+/** * clouds moveLeft */
   animate() {
   this.moveLeft();
   }

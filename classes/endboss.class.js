@@ -50,7 +50,7 @@ class endBoss extends movableObject {
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
-  // loads everything important at the beginning when the class loads
+/** * loads everything important at the beginning when the class loads */
   constructor(endBoss) {
     super().loadImage(endBoss, this.x, this.y);
     this.loadImages(this.images_Alert);
@@ -63,7 +63,7 @@ class endBoss extends movableObject {
     this.moveLeftFunction();
   }
 
-  // make different animations when hit is dead or walk
+/** * make different animations when hit is dead or walk */
   animate() {
     setInterval(() => {
       if (this.health == 1) {
@@ -77,16 +77,17 @@ class endBoss extends movableObject {
     }, 200);
   }
 
-  // when he's dead the game ends
+/** * when he's dead the game ends */
   isDead() {
     this.playAnimation(this.images_Dead);
     setTimeout(() => {
+      this.health = 100;
       this.world.winTheGame();
       this.world.goToStartScreen();
     }, 1000);
   }
 
-// he walks to left if he is alive and he had eye contact with the character
+/** * he walks to left if he is alive and he had eye contact with the character */
   moveLeftFunction() {
     setInterval(() => {
       if (this.health > 2 && this.hadContact) {
@@ -96,7 +97,7 @@ class endBoss extends movableObject {
   }
 
 
-  // when he had eyeContact with the character he makes a animation and beginns to walk 
+ /** * when he had eyeContact with the character he makes a animation and beginns to walk */
   walk() {
     if (this.intervalsAfterHadContact < 7) {
       this.playAnimation(this.images_Alert);
@@ -108,7 +109,7 @@ class endBoss extends movableObject {
     }
   }
 
-  // when he is hit by the salsaBottle his health goes down by 33% after 3 hits he is dead
+/** * when he is hit by the salsaBottle his health goes down by 33% after 3 hits he is dead */
   hit() {
     if (this.health > 2) {
       this.health -= 33;

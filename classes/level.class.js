@@ -7,7 +7,7 @@ class level {
   gameover;
   levelEndX = 1530;
 
-  // loads everything important at the beginning when the class loads
+/** * loads everything important at the beginning when the class loads */
   constructor( enemies, clouds, backgroundObjects, coins, salsabottle, gameover ) {
     this.enemies = enemies;
     this.clouds = clouds;

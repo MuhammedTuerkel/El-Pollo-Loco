@@ -14,23 +14,23 @@ class movableObject extends DrawableObject {
     bottom: 0,
   };
 
-  // push the audio to an array
+/** * push the audio to an array */ 
   constructor(){
     super();
     audioList.push(this.hitSound);
   }
 
-// the movableObject moves to right at a speed
+/** * the movableObject moves to right at a speed */
   moveRight() {
     this.x += this.speed;
   }
 
-  // the movableObject moves to left at a speed
+/** * the movableObject moves to left at a speed */
   moveLeft() {
     this.x -= this.speed;
   }
 
-// different animations of movableObjects is being played
+/** * different animations of movableObjects is being played */
   playAnimation(images) {
     let i = this.currentImage % images.length;
     let path = images[i];
@@ -38,7 +38,7 @@ class movableObject extends DrawableObject {
     this.currentImage++;
   }
 
-  // checks if the movableObject is above ground
+/** * checks if the movableObject is above ground */
   isAboveGround() {
     if (this instanceof ThrowableObject) {
       return true;
@@ -47,7 +47,7 @@ class movableObject extends DrawableObject {
     }
   }
 
-  // checks if 2 objects colliding
+/** * checks if 2 objects colliding */
   isColliding(obj) {
     return (
       this.x + this.width - this.offset.right > obj.x + obj.offset.left &&
@@ -57,7 +57,7 @@ class movableObject extends DrawableObject {
     );
   }
 
-  // the world has a gravity and attracts objects at the same speed
+/** * the world has a gravity and attracts objects at the same speed */
   applyGravity() {
     setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
@@ -67,24 +67,24 @@ class movableObject extends DrawableObject {
     }, 1000 / 25);
   }
 
-  //speed of jumping 
+/** * speed of jumping */
   jump() {
     return (this.speedY = 25);
   }
 
-  //when ernegy is 0 you are dead 
+/** * when ernegy is 0 you are dead */
   isDead() {
     return this.energy == 0;
   }
 
-  // the animation when the character is hit
+/** * the animation when the character is hit */
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
     timepassed = timepassed / 1000;
     return timepassed < 1;
   }
 
-  // when the character is hit his ernegy goes down by -5 and a hit sound is played 
+/** * when the character is hit his ernegy goes down by -5 and a hit sound is played */
   hit() {
     if (this.energy > 0) {
       this.energy -= 5;

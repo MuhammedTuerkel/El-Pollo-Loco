@@ -4,7 +4,7 @@ class ThrowableObject extends movableObject {
   salsabottle = 0;
   world;
 
-  // loads everything important at the beginning when the class loads
+/** * loads everything important at the beginning when the class loads */
   constructor(x, y, world) {
     super().loadImage("img/6_salsa_bottle/salsa_bottle.png");
     this.x = x;
@@ -13,7 +13,7 @@ class ThrowableObject extends movableObject {
     this.throw();
   }
 
-  // a Object that is throwed ist flying towards and down because of gravity
+/** * a Object that is throwed ist flying towards and down because of gravity */
   throw() {
     this.applyGravity();
     setInterval(() => {
