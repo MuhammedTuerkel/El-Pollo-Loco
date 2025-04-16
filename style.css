@@ -21,20 +21,26 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  min-height: 1000px;
+  min-height: 930px;
   height: 100vh;
 }
 
-.imperessum{
+.body-imperessum {
+  color: black;
+  width: calc(100vw - 10px);
+  margin-left:10px;
+}
+
+.imperessum {
   text-decoration: none;
   color: white;
   margin-top: 30px;
   font-size: 16px;
 }
 
-.imperessum:hover{
+.imperessum:hover {
   font-size: 17px;
-color: #aeaeae;
+  color: #aeaeae;
 }
 
 h2 {
@@ -120,7 +126,7 @@ h2 {
     width: 90%;
   }
 
-  .fullscreen{
+  .fullscreen {
     width: 100%;
   }
 }
@@ -156,7 +162,6 @@ h2 {
   .rotatemessage {
     display: block;
   }
-
 }
 
 @media (pointer: coarse) {
@@ -176,15 +181,15 @@ h2 {
     position: relative;
     bottom: 60px;
   }
-  .fullscreen{
+  .fullscreen {
     position: absolute;
   }
   #fullscreen {
     display: none;
   }
-body{
+  body {
     overflow-y: hidden;
-}
+  }
 }
 
 @media (max-height: 600px) {

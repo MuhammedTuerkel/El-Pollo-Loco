@@ -28,29 +28,32 @@ function fullscreenMode() {
 }
 
 /** * mutes all sounds in the website */
-function muteWebsite() {
+function muteWebsite(muted) {
   audioList.forEach((audio) => {
     audio.muted = !audio.muted;
+    if (muted == "true") {
+      audio.muted = "true"
+    }
     localStorage.setItem("muted", audio.muted);
   });
+ 
 }
 
 /** * creates the world class and starts the game */
 function startGame() {
   initLevel();
-  world = new World(canvas, keyboard);
-  if (gameIsRunning) {
+world = new World(canvas, keyboard);
     checkIfgameIsMuted();
-  }
   gameIsRunning = true;
 }
 
 /** * checks if the game is already muted at the beginning */
 function checkIfgameIsMuted() {
   let muted = localStorage.getItem("muted");
-  if (muted) {
-    muteWebsite();
+  if (muted == "true") {
+    muteWebsite(muted);
   }
+
 }
 
 /** * adds a startScreen without starting the game */

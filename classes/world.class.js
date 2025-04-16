@@ -43,7 +43,7 @@ class World {
 /** * set the world variable to the subvariables to have access to it */
   setWorld() {
     this.character.world = this;
-    this.level.enemies[3].world = this;
+    this.level.endbossChicken[0].world = this;
   }
 
 /** * runs the checkColission functions in an Interval that checks 5 times a second */
@@ -82,6 +82,7 @@ class World {
     this.addToMap(this.level.coins);
     this.addToMap(this.level.salsabottle);
     this.addToMap(this.throwableObject);
+    this.addToMap(this.level.endbossChicken);
   }
 
 /** * calls the addToMap-draw function for the statusbar and moves with the camera to stay static */
@@ -117,10 +118,18 @@ class World {
 
 /** * checks if the character have a collision with the enemies or the endBoss */
   checkCollisionsWithEnemies() {
-    this.level.enemies.forEach((enemy) => {
+    this.level.enemies.forEach((enemy, index) => {
       if (this.character.isColliding(enemy)) {
-        this.character.hit();
-        this.statusbar[0].setEnergyInTheStatusbar(this.character.energy);
+        if (this.character.isAbove(enemy)) {
+          this.level.enemies.splice(index, 1);
+          this.character.jump();
+          setTimeout(() => {
+          }, 1000);
+        } else {
+          // Von der Seite oder unten → Charakter bekommt Schaden
+          this.character.hit();
+          this.statusbar[0].setEnergyInTheStatusbar(this.character.energy);
+        }
       }
     });
   }
@@ -152,12 +161,12 @@ class World {
 /** * checks if the salsabottles have a collision with the endBoss */
   checkCollisionsWithEndBoss(bottle) {
     let Interval = setInterval(() => {
-      if (bottle.isColliding(this.level.enemies[3])) {
-        this.level.enemies[3].hit();
+      if (bottle.isColliding(this.level.endbossChicken[0])) {
+        bottle.splash();
+        this.level.endbossChicken[0].hit();
         this.endBossHit.play();
-        console.log(this.level.enemies[3].health);
         this.statusbar[3].setEndbossInTheStatusbar(
-          this.level.enemies[3].health
+          this.level.endbossChicken[0].health
         );
       }
     }, 1000);

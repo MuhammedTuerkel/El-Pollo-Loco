@@ -66,6 +66,7 @@ class Character extends movableObject {
   coins = 0;
   salsaBottle = 0;
   randomNumberForEndscreen = Math.floor(Math.random() * 4);
+  lastY;
   offset = {
     top: 120,
     left: 30,

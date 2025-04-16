@@ -3,10 +3,21 @@ let level1;
 function initLevel() {
   level1 = new level(
     (enemies = [
-      new Chicken("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png", "normal", 800),
-      new Chicken("img/3_enemies_chicken/chicken_small/1_walk/1_w.png", "small", 300),
-      new Chicken("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png" ,"normal",500),
-      new endBoss("img/4_enemie_boss_chicken/2_alert/G5.png"),
+      new Chicken(
+        "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
+        "normal",
+        800
+      ),
+      new Chicken(
+        "img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
+        "small",
+        300
+      ),
+      new Chicken(
+        "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
+        "normal",
+        500
+      ),
     ]),
     (clouds = [
       new Clouds("img/5_background/layers/4_clouds/1.png", 0),
@@ -42,7 +53,6 @@ function initLevel() {
       new coin("img/8_coin/coin_2.png", 1000),
       new coin("img/8_coin/coin_2.png", 1300),
     ]),
-
     (salsabottle = [
       new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 500),
       new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 800),
@@ -50,12 +60,14 @@ function initLevel() {
       new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 1100),
       new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 1500),
     ]),
-
     (gameover = [
       new gameOver("img/9_intro_outro_screens/game_over/game over!.png"),
       new gameOver("img/9_intro_outro_screens/game_over/game over!.png"),
       new gameOver("img/9_intro_outro_screens/game_over/oh no you lost!.png"),
       new gameOver("img/9_intro_outro_screens/game_over/you lost.png"),
-    ])
+    ]),
+    (endbossChicken = [
+      new endBoss("img/4_enemie_boss_chicken/2_alert/G5.png")
+    ]),
   );
 }
