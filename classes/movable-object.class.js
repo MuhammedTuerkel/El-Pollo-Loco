@@ -60,8 +60,8 @@ class movableObject extends DrawableObject {
     const characterBottom = this.y + this.height - this.offset.bottom;
     const enemyTop = enemy.y + enemy.offset.top;
     return (
-      characterBottom >= enemyTop  && 
-      this.speedY < -25                   
+      characterBottom >= enemyTop +15  && 
+      this.speedY > -27.5 && this.speedY < -10                  
     );
   }
 

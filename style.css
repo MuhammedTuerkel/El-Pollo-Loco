@@ -158,7 +158,7 @@ h2 {
   }
 }
 
-@media only screen and (max-device-width: 760px) and (orientation: portrait) {
+@media only screen and (pointer: coarse) and (orientation: portrait) {
   .rotatemessage {
     display: block;
   }

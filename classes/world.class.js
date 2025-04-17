@@ -119,8 +119,9 @@ class World {
 /** * checks if the character have a collision with the enemies or the endBoss */
   checkCollisionsWithEnemies() {
     this.level.enemies.forEach((enemy, index) => {
-      if (this.character.isColliding(enemy)) {
+      if (this.character.isColliding(enemy) || this.character.isColliding(this.level.endbossChicken[0])) {
         if (this.character.isAbove(enemy)) {
+          console.log(this.character.speedY)
           this.level.enemies.splice(index, 1);
           this.character.jump();
           setTimeout(() => {
