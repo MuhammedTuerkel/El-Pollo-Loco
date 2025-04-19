@@ -1,6 +1,6 @@
 class movableObject extends DrawableObject {
   otherDirection = false;
-  speedY = 0;
+  speedY = 25;
   acceleration = 2.5;
   energy = 100;
   lastHit = 0;
@@ -60,7 +60,7 @@ class movableObject extends DrawableObject {
     const characterBottom = this.y + this.height - this.offset.bottom;
     const enemyTop = enemy.y + enemy.offset.top;
     return (
-      characterBottom >= enemyTop +15  && 
+      characterBottom >= enemyTop -90  && 
       this.speedY > -27.5 && this.speedY < -10                  
     );
   }
@@ -89,7 +89,7 @@ class movableObject extends DrawableObject {
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
     timepassed = timepassed / 1000;
-    return timepassed < 1;
+    return timepassed < 0.5;
   }
 
   /** * when the character is hit his ernegy goes down by -5 and a hit sound is played */

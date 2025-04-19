@@ -4,7 +4,7 @@ class endBoss extends movableObject {
   y = 100;
   health = 100;
   isHit = false;
-  speed = 0.8;
+  speed = 1;
   world;
   hadContact = false;
   intervalsAfterHadContact = 0;
@@ -58,7 +58,7 @@ class endBoss extends movableObject {
     this.loadImages(this.images_Attack);
     this.loadImages(this.images_Hurt);
     this.loadImages(this.images_Dead);
-    this.x = 1900;
+    this.x = 1600;
     this.animate();
     this.moveLeftFunction();
   }
@@ -66,15 +66,17 @@ class endBoss extends movableObject {
 /** * make different animations when hit is dead or walk */
   animate() {
     setInterval(() => {
-      if (this.health == 1) {
+      if (this.health == 0) {
         this.isDead();
       } else if (this.isHit) {
         this.playAnimation(this.images_Hurt);
-      } else if (this.world.character.x > 1500 || this.hadContact) {
+      } else if ( this.hadContact) {
         this.walk();
         this.intervalsAfterHadContact++;
+      }else if (this.world.character.x > 1220) {
+        this.hadContact = true;
       }
-    }, 200);
+    }, 100);
   }
 
 /** * when he's dead the game ends */
@@ -90,7 +92,7 @@ class endBoss extends movableObject {
 /** * he walks to left if he is alive and he had eye contact with the character */
   moveLeftFunction() {
     setInterval(() => {
-      if (this.health > 2 && this.hadContact) {
+      if (this.health > 0 && this.intervalsAfterHadContact > 14) {
         this.moveLeft();
       }
     }, 1000 / 60);
@@ -103,7 +105,7 @@ class endBoss extends movableObject {
       this.playAnimation(this.images_Alert);
     } else if (this.intervalsAfterHadContact < 14) {
       this.playAnimation(this.images_Attack);
-    } else {
+    } else if (this.intervalsAfterHadContact >14){
       this.playAnimation(this.images_Walking);
       this.hadContact = true;
     }
@@ -111,8 +113,8 @@ class endBoss extends movableObject {
 
 /** * when he is hit by the salsaBottle his health goes down by 33% after 3 hits he is dead */
   hit() {
-    if (this.health > 2) {
-      this.health -= 33;
+    if (this.health > 0) {
+      this.health -= 20;
       this.isHit = true;
       setTimeout(() => {
         this.isHit = false;

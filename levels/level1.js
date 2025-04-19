@@ -1,23 +1,12 @@
 let level1;
 
+/** *loads the level for the game */
 function initLevel() {
   level1 = new level(
     (enemies = [
-      new Chicken(
-        "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
-        "normal",
-        800
-      ),
-      new Chicken(
-        "img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
-        "small",
-        300
-      ),
-      new Chicken(
-        "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
-        "normal",
-        500
-      ),
+      new Chicken("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png","normal",800),
+      new Chicken("img/3_enemies_chicken/chicken_small/1_walk/1_w.png","small",300 ),
+      new Chicken("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png","normal", 500),
     ]),
     (clouds = [
       new Clouds("img/5_background/layers/4_clouds/1.png", 0),

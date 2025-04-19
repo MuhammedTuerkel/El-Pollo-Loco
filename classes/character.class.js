@@ -78,7 +78,7 @@ class Character extends movableObject {
 
 /** * loads everything important at the beginning when the class loads */
   constructor(character) {
-    super().loadImage(character, 150, 80);
+    super().loadImage(character, 150, 180);
     this.height = 250;
     this.width = 130;
     this.loadImages(this.images_Walking);

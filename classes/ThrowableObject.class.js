@@ -56,10 +56,10 @@ clearInterval(this.bottleAnimation);
 clearInterval(  this.gravityInterval);
 let splash = setInterval(() => {
   this.playAnimation(this.bottleSplash)
-}, 1000/6);
+}, 1000/12);
 setTimeout(() => {
   clearInterval(splash)
   this.x =3000
-}, 1000);
+}, 500);
   }
 }

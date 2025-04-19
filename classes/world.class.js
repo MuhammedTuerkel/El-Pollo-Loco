@@ -5,7 +5,7 @@ class World {
     new StatusBar("energy", 10, -10),
     new StatusBar("coins", 10, 40),
     new StatusBar("salsabottle", 10, 95),
-    new StatusBar("endboss", 450, -10),
+    new StatusBar("endboss", 420, -10),
   ];
   throwableObject = [];
   canvas;
@@ -18,7 +18,7 @@ class World {
   trow = new Audio("audio/throw.mp3");
   endBossHit = new Audio("audio/endboss_hit.wav");
 
-/** * loads everything important at the beginning when the class loads */
+  /** * loads everything important at the beginning when the class loads */
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -30,7 +30,7 @@ class World {
     this.keyboard.bindBtsPressEvents();
   }
 
-/** * plays the gamemusic in the background */
+  /** * plays the gamemusic in the background */
   playGameMusic() {
     this.gameMusic.loop = true;
     this.gameMusic.play();
@@ -40,23 +40,24 @@ class World {
     audioList.push(this.endBossHit);
   }
 
-/** * set the world variable to the subvariables to have access to it */
+  /** * set the world variable to the subvariables to have access to it */
   setWorld() {
     this.character.world = this;
     this.level.endbossChicken[0].world = this;
   }
 
-/** * runs the checkColission functions in an Interval that checks 5 times a second */
+  /** * runs the checkColission functions in an Interval that checks 5 times a second */
   run() {
     setInterval(() => {
       this.checkCollisionsWithEnemies();
       this.checkCollisionsWithCoins();
       this.checkCollisionsWithSalsaBottle();
       this.checkThrowObjects();
+      this.checkCharacterCollisionWithEndBoss();
     }, 200);
   }
 
-/** * the draw function is a function that's repeats itself again and again it draws everything in to the canvas */
+  /** * the draw function is a function that's repeats itself again and again it draws everything in to the canvas */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
@@ -74,7 +75,7 @@ class World {
     }
   }
 
-/** * calls the addToMap-draw function for all objects */
+  /** * calls the addToMap-draw function for all objects */
   addAllObjectsToMap() {
     this.addToMap(this.level.backgroundObjects);
     this.addToMap(this.level.clouds);
@@ -85,14 +86,14 @@ class World {
     this.addToMap(this.level.endbossChicken);
   }
 
-/** * calls the addToMap-draw function for the statusbar and moves with the camera to stay static */
+  /** * calls the addToMap-draw function for the statusbar and moves with the camera to stay static */
   addStatusBarToMap() {
     this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusbar);
     this.ctx.translate(this.camera_x, 0);
   }
 
-/** * checks if you have a Object to throw and then throws it */
+  /** * checks if you have a Object to throw and then throws it */
   checkThrowObjects() {
     if (this.keyboard.THROW && this.statusbar[2].salsaBottle > 1) {
       let bottle = this.throwObject();
@@ -101,7 +102,7 @@ class World {
     }
   }
 
-/** * Creates the throwableObject and draws it then refreshs the statusbar */
+  /** * Creates the throwableObject and draws it then refreshs the statusbar */
   throwObject() {
     let bottle = new ThrowableObject(
       this.character.x + 50,
@@ -116,26 +117,36 @@ class World {
     return bottle;
   }
 
-/** * checks if the character have a collision with the enemies or the endBoss */
+  /** * checks if the character have a collision with the enemies */
   checkCollisionsWithEnemies() {
     this.level.enemies.forEach((enemy, index) => {
-      if (this.character.isColliding(enemy) || this.character.isColliding(this.level.endbossChicken[0])) {
-        if (this.character.isAbove(enemy)) {
-          console.log(this.character.speedY)
-          this.level.enemies.splice(index, 1);
-          this.character.jump();
-          setTimeout(() => {
-          }, 1000);
-        } else {
-          // Von der Seite oder unten → Charakter bekommt Schaden
-          this.character.hit();
-          this.statusbar[0].setEnergyInTheStatusbar(this.character.energy);
+      if (
+        this.character.isColliding(enemy) ||
+        this.character.isColliding(this.level.endbossChicken[0])
+      ) {
+        if (enemy.chickenHit == 0) {
+          if (this.character.isAbove(enemy)) {
+            this.level.enemies[index].chickenHit = 1;
+            this.character.jump();
+            setTimeout(() => {}, 1000);
+          } else {
+            this.character.hit();
+            this.statusbar[0].setEnergyInTheStatusbar(this.character.energy);
+          }
         }
       }
     });
   }
 
-/** * checks if the character have a collision with coins */
+  /** * checks if the character have a collision the endBoss */
+  checkCharacterCollisionWithEndBoss() {
+      if (this.character.isColliding(this.level.endbossChicken[0])) {
+        this.character.hit();
+        this.statusbar[0].setEnergyInTheStatusbar(this.character.energy);
+      }
+  }
+
+  /** * checks if the character have a collision with coins */
   checkCollisionsWithCoins() {
     for (let i = 0; i < this.level.coins.length; i++) {
       if (this.character.isColliding(coins[i])) {
@@ -146,7 +157,7 @@ class World {
     }
   }
 
-/** * checks if the character have a collision with salsabottles */
+  /** * checks if the character have a collision with salsabottles */
   checkCollisionsWithSalsaBottle() {
     for (let i = 0; i < this.level.salsabottle.length; i++) {
       if (this.character.isColliding(this.level.salsabottle[i])) {
@@ -159,7 +170,7 @@ class World {
     }
   }
 
-/** * checks if the salsabottles have a collision with the endBoss */
+  /** * checks if the salsabottles have a collision with the endBoss */
   checkCollisionsWithEndBoss(bottle) {
     let Interval = setInterval(() => {
       if (bottle.isColliding(this.level.endbossChicken[0])) {
@@ -176,7 +187,7 @@ class World {
     }, 2000);
   }
 
-/** * draws the objects in to the map */
+  /** * draws the objects in to the map */
   addToMap(object) {
     for (let i = 0; i < object.length; i++) {
       this.ctx.drawImage(
@@ -189,7 +200,7 @@ class World {
     }
   }
 
- /** * changes the direction of the Character if he walks to the opposite side */
+  /** * changes the direction of the Character if he walks to the opposite side */
   changeDirection() {
     if (this.character.otherDirection) {
       this.ctx.save();
@@ -199,7 +210,7 @@ class World {
     }
   }
 
-/** * restores the direction of the character */
+  /** * restores the direction of the character */
   restoreDirection() {
     if (this.character.otherDirection) {
       this.character.x = this.character.x * -1;
@@ -207,7 +218,7 @@ class World {
     }
   }
 
-/** * draws the character to the map */
+  /** * draws the character to the map */
   addCharacterToMap() {
     this.ctx.drawImage(
       this.character.img,
@@ -218,17 +229,17 @@ class World {
     );
   }
 
-/** * deletes the coin if you colllect it from the ground */
+  /** * deletes the coin if you colllect it from the ground */
   deleteCoin(i) {
     this.level.coins.splice(i, 1);
   }
 
-/** * deletes the salsaBottle if you colllect it from the ground */
+  /** * deletes the salsaBottle if you colllect it from the ground */
   deleteSalsabottle(i) {
     this.level.salsabottle.splice(i, 1);
   }
 
-/** * if you die the game is over and it loads the gameover screen */
+  /** * if you die the game is over and it loads the gameover screen */
   gameOverScreen(i, cI) {
     this.gameMusic.pause();
     this.gameMusic.currentTime = 0;
@@ -256,7 +267,7 @@ class World {
     canvas.setAttribute("onclick", "init(allow = true)");
   }
 
-/** * add a random gameover screen to the canvas */
+  /** * add a random gameover screen to the canvas */
   addGameOverToMap(i) {
     this.ctx.drawImage(
       this.level.gameover[i].img,

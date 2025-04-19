@@ -29,7 +29,9 @@ class StatusBar extends DrawableObject {
   endBossBar = [
     "img/7_statusbars/2_statusbar_endboss/1_Hit_Left-removebg-preview.png",
     "img/7_statusbars/2_statusbar_endboss/2_Hits_Left-removebg-preview.png",
-    "img/7_statusbars/2_statusbar_endboss/3_Hits_Left-removebg-preview.png"
+    "img/7_statusbars/2_statusbar_endboss/3_Hits_Left-removebg-preview.png",
+    "img/7_statusbars/2_statusbar_endboss/4_Hits_Left-removebg-preview.png",
+    "img/7_statusbars/2_statusbar_endboss/5_Hits_Left-removebg-preview.png"
   ];
 
   percentage = 100;
@@ -147,10 +149,14 @@ this.setEndbossInTheStatusbar(100);
   /** * health of endboss */
   getNumForEndboss(variable){
     if (variable == 100) {
+      return 4;
+    } else if (variable == 80) {
+      return 3;
+    } else if (variable == 60) {
       return 2;
-    } else if (variable == 67) {
+    } else if (variable == 40) {
       return 1;
-    } else if (variable < 34) {
+    }else if (variable == 20) {
       return 0;
     }else{
       return 0;
