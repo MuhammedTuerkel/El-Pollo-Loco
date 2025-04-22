@@ -19,6 +19,13 @@ class Chicken extends movableObject {
 
   chickenHit = 0;
 
+  offset = {
+    top: -40,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  };
+
   /** * loads everything important at the beginning when the class loads */
   constructor(img, chicken, x) {
     super().loadImage(img, this.x, 330);

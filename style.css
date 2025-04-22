@@ -26,7 +26,7 @@ body {
 }
 
 .body-imperessum {
-  color: black;
+  color: rgba(220, 56, 56, 1);
   width: calc(100vw - 10px);
   margin-left:10px;
 }

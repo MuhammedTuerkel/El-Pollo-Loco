@@ -59,8 +59,9 @@ class movableObject extends DrawableObject {
   isAbove(enemy) {
     const characterBottom = this.y + this.height - this.offset.bottom;
     const enemyTop = enemy.y + enemy.offset.top;
+    console.log(this.speedY)
     return (
-      characterBottom >= enemyTop -90  && 
+      characterBottom >= enemyTop  && 
       this.speedY > -27.5 && this.speedY < -10                  
     );
   }

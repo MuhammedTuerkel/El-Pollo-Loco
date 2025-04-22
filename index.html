@@ -43,7 +43,8 @@
         </div>
     </div>
     <div class="fullscreen">
-        <i onclick="muteWebsite()" class="fa-solid fa-volume-xmark"></i>
+        <i id="muted" onclick="setMuteInLocalStorage()" class="fa-solid fa-volume-xmark"></i>
+        <i id="unmuted" onclick ="setMuteInLocalStorage()" class="fa-solid fa-volume-high"></i>
         <i id="fullscreen" onclick="fullscreenMode()" class="fa-solid fa-expand"></i>
     </div>
     <div class="keysDescription">

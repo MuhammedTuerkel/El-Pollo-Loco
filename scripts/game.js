@@ -7,6 +7,7 @@ let gameIsRunning = false;
 
 function onload() {
   canvas = document.getElementById("canvas");
+  setMuteInLocalStorage("reload");
   canvas.setAttribute("onclick", "init(allow = true)");
   init();
 }
@@ -22,6 +23,46 @@ function init() {
   }
 }
 
+/** * function that gets and sets mute in the localStorage */
+function setMuteInLocalStorage(reload){
+let path = localStorage.getItem("muted");
+if (reload) {
+  path = checkFromPageReload(path);
+}
+if(path == "true"){
+ifMutedIsTrue();
+}else if(path == "false"){
+ifMutedIsFalse();
+}
+if (audioList.length > 0) {
+  let audio = localStorage.getItem("muted")
+  muteWebsite(audio)
+}
+}
+
+/** * when the page reloads this function checks from the Localstorage if the Website is already muted or not */
+function checkFromPageReload(path){
+  if (path == "true") {
+  return path = "false"
+  }else if (path == "false"){
+  return  path = "true"
+  }
+}
+
+/** * function that if muted is true it turns it into false  */
+function ifMutedIsTrue(){
+  document.getElementById("unmuted").style = "display:flex;"
+  localStorage.setItem("muted", false)
+  document.getElementById("muted").style = "display:none;"
+}
+
+/** * function that if muted is false it turns it into true  */
+function ifMutedIsFalse(){
+  document.getElementById("muted").style = "display:flex;"
+  localStorage.setItem("muted", true);
+  document.getElementById("unmuted").style = "display:none;"
+}
+
 /** * makes the game to fullscreen */
 function fullscreenMode() {
   canvas.requestFullscreen();
@@ -29,12 +70,9 @@ function fullscreenMode() {
 
 /** * mutes all sounds in the website */
 function muteWebsite(muted) {
+  let isMuted = muted === "true";
   audioList.forEach((audio) => {
-    audio.muted = !audio.muted;
-    if (muted == "true") {
-      audio.muted = "true"
-    }
-    localStorage.setItem("muted", audio.muted);
+    audio.muted = isMuted;
   });
  
 }
@@ -43,17 +81,8 @@ function muteWebsite(muted) {
 function startGame() {
   initLevel();
 world = new World(canvas, keyboard);
-    checkIfgameIsMuted();
+setMuteInLocalStorage("reload")
   gameIsRunning = true;
-}
-
-/** * checks if the game is already muted at the beginning */
-function checkIfgameIsMuted() {
-  let muted = localStorage.getItem("muted");
-  if (muted == "true") {
-    muteWebsite(muted);
-  }
-
 }
 
 /** * adds a startScreen without starting the game */

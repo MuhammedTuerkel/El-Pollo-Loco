@@ -140,10 +140,10 @@ class World {
 
   /** * checks if the character have a collision the endBoss */
   checkCharacterCollisionWithEndBoss() {
-      if (this.character.isColliding(this.level.endbossChicken[0])) {
-        this.character.hit();
-        this.statusbar[0].setEnergyInTheStatusbar(this.character.energy);
-      }
+    if (this.character.isColliding(this.level.endbossChicken[0])) {
+      this.character.hit();
+      this.statusbar[0].setEnergyInTheStatusbar(this.character.energy);
+    }
   }
 
   /** * checks if the character have a collision with coins */

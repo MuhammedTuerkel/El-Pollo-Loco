@@ -4,7 +4,7 @@ let level1;
 function initLevel() {
   level1 = new level(
     (enemies = [
-      new Chicken("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png","normal",800),
+      new Chicken("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png","normal",750),
       new Chicken("img/3_enemies_chicken/chicken_small/1_walk/1_w.png","small",300 ),
       new Chicken("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png","normal", 500),
     ]),
@@ -43,7 +43,7 @@ function initLevel() {
       new coin("img/8_coin/coin_2.png", 1300, 100),
     ]),
     (salsabottle = [
-      new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 700),
+      new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 900),
       new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 1100),
       new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 1200),
       new salsaBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png", 1300),
