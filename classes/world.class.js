@@ -127,7 +127,7 @@ class World {
         if (enemy.chickenHit == 0) {
           if (this.character.isAbove(enemy)) {
             this.level.enemies[index].chickenHit = 1;
-            this.character.jump();
+            this.character.jump(22.5, this.character.speedY);
             setTimeout(() => {}, 1000);
           } else {
             this.character.hit();

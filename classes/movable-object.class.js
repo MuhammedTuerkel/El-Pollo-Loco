@@ -59,7 +59,6 @@ class movableObject extends DrawableObject {
   isAbove(enemy) {
     const characterBottom = this.y + this.height - this.offset.bottom;
     const enemyTop = enemy.y + enemy.offset.top;
-    console.log(this.speedY)
     return (
       characterBottom >= enemyTop  && 
       this.speedY > -27.5 && this.speedY < -10                  
@@ -77,8 +76,11 @@ class movableObject extends DrawableObject {
   }
 
   /** * speed of jumping */
-  jump() {
-    return (this.speedY = 25);
+  jump(y, speedY) {
+    if (speedY < -1) {
+    y = -speedY
+    }
+    return (this.speedY = y);
   }
 
   /** * when ernegy is 0 you are dead */

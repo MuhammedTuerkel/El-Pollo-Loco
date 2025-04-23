@@ -44,12 +44,14 @@ bottleSplash = [
     }, 25);
   }
 
+  /** *gives the bottle a flying and turning animation */
   animate(){
    this.bottleAnimation = setInterval(() => {
       this.playAnimation(this.bottleFlyAnimation);
     }, 1000/25);
   }
 
+  /** *when the bottle have contact with the enemie it splashes on the point */
   splash(){
 clearInterval(this.FlyingBottle);
 clearInterval(this.bottleAnimation);

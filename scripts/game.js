@@ -26,6 +26,9 @@ function init() {
 /** * function that gets and sets mute in the localStorage */
 function setMuteInLocalStorage(reload){
 let path = localStorage.getItem("muted");
+if (path == null) {
+  path = "false";
+}
 if (reload) {
   path = checkFromPageReload(path);
 }
@@ -99,6 +102,7 @@ function addStartScreen() {
   };
 }
 
+/** *checks if the keys is pressed if its pressed it makes the variable to true */
 window.addEventListener("keydown", (event) => {
   if (event.keyCode == 68) {
     keyboard.RIGHT = true;
@@ -117,6 +121,7 @@ window.addEventListener("keydown", (event) => {
   }
 });
 
+/** *checks if the keys is released if its released it makes the variable to false again */
 window.addEventListener("keyup", (event) => {
   if (event.keyCode == 68) {
     keyboard.RIGHT = false;

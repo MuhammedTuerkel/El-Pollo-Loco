@@ -173,7 +173,7 @@ class Character extends movableObject {
 
 /** * function to jump */
   jumpFunction() {
-    this.jump();
+    this.jump(25);
     this.jumpSound.play();
   }
 

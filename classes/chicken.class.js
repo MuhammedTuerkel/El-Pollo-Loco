@@ -42,25 +42,35 @@ class Chicken extends movableObject {
   animate(chicken) {
     setInterval(() => {
       if (chicken == "normal") {
-        if (this.chickenHit == 1) {
-          this.playAnimation(this.chicken_Normal_Dead);
-        } else {
-          this.playAnimation(this.chicken_Normal_Walking);
-        }
+        this.normalChickenAnimations();
       }
       if (chicken == "small") {
-        if (this.chickenHit == 1) {
-          this.playAnimation(this.chicken_Small_Dead);
-        } else {
-          this.playAnimation(this.chicken_Small_Walking);
-        }
+        this.smallChickenAnimations();
       }
     }, 1000 / 10);
 
     setInterval(() => {
       if (this.chickenHit == 0) {
-      this.moveLeft();
+        this.moveLeft();
       }
     }, 1000 / 15);
+  }
+
+    /** * animations for the normal size chickens */
+  normalChickenAnimations() {
+    if (this.chickenHit == 1) {
+      this.playAnimation(this.chicken_Normal_Dead);
+    } else {
+      this.playAnimation(this.chicken_Normal_Walking);
+    }
+  }
+
+  /** * animations for the small size chickens */
+  smallChickenAnimations() {
+    if (this.chickenHit == 1) {
+      this.playAnimation(this.chicken_Small_Dead);
+    } else {
+      this.playAnimation(this.chicken_Small_Walking);
+    }
   }
 }
