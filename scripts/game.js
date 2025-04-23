@@ -4,11 +4,13 @@ let keyboard = new Keyboard();
 let allow = false;
 let audioList = [];
 let gameIsRunning = false;
+let ctx;
 
 function onload() {
   canvas = document.getElementById("canvas");
+  ctx = canvas.getContext("2d");
   setMuteInLocalStorage("reload");
-  canvas.setAttribute("onclick", "init(allow = true)");
+  // canvas.setAttribute("onclick", "init(allow = true)");
   init();
 }
 
@@ -24,46 +26,46 @@ function init() {
 }
 
 /** * function that gets and sets mute in the localStorage */
-function setMuteInLocalStorage(reload){
-let path = localStorage.getItem("muted");
-if (path == null) {
-  path = "false";
-}
-if (reload) {
-  path = checkFromPageReload(path);
-}
-if(path == "true"){
-ifMutedIsTrue();
-}else if(path == "false"){
-ifMutedIsFalse();
-}
-if (audioList.length > 0) {
-  let audio = localStorage.getItem("muted")
-  muteWebsite(audio)
-}
+function setMuteInLocalStorage(reload) {
+  let path = localStorage.getItem("muted");
+  if (path == null) {
+    path = "false";
+  }
+  if (reload) {
+    path = checkFromPageReload(path);
+  }
+  if (path == "true") {
+    ifMutedIsTrue();
+  } else if (path == "false") {
+    ifMutedIsFalse();
+  }
+  if (audioList.length > 0) {
+    let audio = localStorage.getItem("muted");
+    muteWebsite(audio);
+  }
 }
 
 /** * when the page reloads this function checks from the Localstorage if the Website is already muted or not */
-function checkFromPageReload(path){
+function checkFromPageReload(path) {
   if (path == "true") {
-  return path = "false"
-  }else if (path == "false"){
-  return  path = "true"
+    return (path = "false");
+  } else if (path == "false") {
+    return (path = "true");
   }
 }
 
 /** * function that if muted is true it turns it into false  */
-function ifMutedIsTrue(){
-  document.getElementById("unmuted").style = "display:flex;"
-  localStorage.setItem("muted", false)
-  document.getElementById("muted").style = "display:none;"
+function ifMutedIsTrue() {
+  document.getElementById("unmuted").style = "display:flex;";
+  localStorage.setItem("muted", false);
+  document.getElementById("muted").style = "display:none;";
 }
 
 /** * function that if muted is false it turns it into true  */
-function ifMutedIsFalse(){
-  document.getElementById("muted").style = "display:flex;"
+function ifMutedIsFalse() {
+  document.getElementById("muted").style = "display:flex;";
   localStorage.setItem("muted", true);
-  document.getElementById("unmuted").style = "display:none;"
+  document.getElementById("unmuted").style = "display:none;";
 }
 
 /** * makes the game to fullscreen */
@@ -77,14 +79,13 @@ function muteWebsite(muted) {
   audioList.forEach((audio) => {
     audio.muted = isMuted;
   });
- 
 }
 
 /** * creates the world class and starts the game */
 function startGame() {
   initLevel();
-world = new World(canvas, keyboard);
-setMuteInLocalStorage("reload")
+  world = new World(canvas, keyboard);
+  setMuteInLocalStorage("reload");
   gameIsRunning = true;
 }
 
@@ -101,6 +102,7 @@ function addStartScreen() {
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
   };
 }
+
 
 /** *checks if the keys is pressed if its pressed it makes the variable to true */
 window.addEventListener("keydown", (event) => {
