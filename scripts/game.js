@@ -10,7 +10,7 @@ function onload() {
   canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
   setMuteInLocalStorage("reload");
-  // canvas.setAttribute("onclick", "init(allow = true)");
+  canvas.setAttribute("onclick", "init(allow = true)");
   init();
 }
 
@@ -60,6 +60,31 @@ function ifMutedIsTrue() {
   localStorage.setItem("muted", false);
   document.getElementById("muted").style = "display:none;";
 }
+
+  /** * goes to StartScreen when the gameEnds */
+  function goToStartScreen() {
+    document.getElementById('gameOverText').style = "display:none;";
+    audioList = [];
+    world = null;
+    init((allow = false));
+    canvas.setAttribute("onclick", "init(allow = true)");
+  }
+
+  /** * when the character is dead or win the game he can restart the game */
+  function retryStartGame(){
+    document.getElementById('gameOverText').style = "display:none;";
+    audioList = [];
+    world = null;
+    init((allow = true));
+  }
+
+    /** * goes to StartScreen when the gameEnds */
+    function wonTheGame(){
+      addStartScreen();
+      audioList = [];
+      world =null;
+      document.getElementById('gameOverText').style = "";
+    }
 
 /** * function that if muted is false it turns it into true  */
 function ifMutedIsFalse() {

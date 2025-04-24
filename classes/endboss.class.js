@@ -85,7 +85,7 @@ class endBoss extends movableObject {
     setTimeout(() => {
       this.health = 100;
       this.world.winTheGame();
-      this.world.goToStartScreen();
+      wonTheGame();
     }, 1000);
   }
 

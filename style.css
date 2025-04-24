@@ -38,6 +38,36 @@ body {
   font-size: 16px;
 }
 
+.gameOverText{
+  display: flex;
+  gap: 40px;
+  position: relative;
+  bottom: 50px;
+  box-sizing: border-box;
+  height: 0px;
+}
+
+.gameOverText p {
+  color: white;
+  font-size: 20px;
+cursor: pointer;
+margin: 0;
+}
+
+.BackToPage{
+  text-decoration: none;
+  color: black;
+  font-size: 30px;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+.gameOverText p:hover{
+  font-size: 21px;
+  color: #dad4d4;
+}
+
 .imperessum:hover {
   font-size: 17px;
   color: #aeaeae;
