@@ -197,6 +197,9 @@ class World {
         object[i].width,
         object[i].height
       );
+      ctx.beginPath();
+      ctx.rect(object[i].x , object[i].y, object[i].width, object[i].height);
+      ctx.stroke();
     }
   }
 
@@ -248,7 +251,7 @@ class World {
     this.addGameOverToMap(i);
     this.gameoverMusic.play();
     clearInterval(cI);
-    document.getElementById('gameOverText').style = "";
+    document.getElementById("gameOverText").style = "";
   }
 
   winTheGame() {

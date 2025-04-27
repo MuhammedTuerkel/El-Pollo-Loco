@@ -8,6 +8,12 @@ class endBoss extends movableObject {
   world;
   hadContact = false;
   intervalsAfterHadContact = 0;
+  offset = {
+    top: 120,
+    left: 30,
+    right: 40,
+    bottom: 0,
+  };
 
   images_Alert = [
     "img/4_enemie_boss_chicken/2_alert/G5.png",
